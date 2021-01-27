@@ -1,6 +1,47 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/HexCell.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Tiles/Cell1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=3]
 
 [node name="HexCell" type="Sprite"]
+texture = ExtResource( 2 )
 script = ExtResource( 1 )
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="wall_upper_right" type="Sprite" parent="Walls"]
+position = Vector2( 45.2653, -77.5119 )
+rotation = 0.523599
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
+
+[node name="wall_right" type="Sprite" parent="Walls"]
+position = Vector2( 90, 0 )
+rotation = 1.5708
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
+
+[node name="wall_lower_right" type="Sprite" parent="Walls"]
+position = Vector2( 45.265, 77.512 )
+rotation = -0.523599
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
+
+[node name="wall_lower_left" type="Sprite" parent="Walls"]
+position = Vector2( -45.265, 77.512 )
+rotation = 0.523599
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
+
+[node name="wall_left" type="Sprite" parent="Walls"]
+position = Vector2( -90, 0 )
+rotation = 1.5708
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
+
+[node name="wall_upper_left" type="Sprite" parent="Walls"]
+position = Vector2( -45.265, -77.512 )
+rotation = -0.523599
+scale = Vector2( 27, 2 )
+texture = ExtResource( 3 )
