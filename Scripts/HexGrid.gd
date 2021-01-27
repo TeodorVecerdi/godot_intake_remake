@@ -16,8 +16,8 @@ onready var cellContainer = $Cells
 
 var cellArray
 
-func _ready():
 
+func _ready():
 	cellArray = []
 	for y in range(CellsY):
 		cellArray.append([])
@@ -25,12 +25,21 @@ func _ready():
 			cellArray[y].append(HexCell.instance())
 			var texType = randi() % 2
 			if texType == 0:
-				cellArray[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), normalCells.getTextureRandom())
+				cellArray[y][x].initialize(
+					HexConstants.ArrayToWorld(x, y, Scale), normalCells.getTextureRandom()
+				)
 			else:
-				cellArray[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), hiddenCells.getTextureRandom())
+				cellArray[y][x].initialize(
+					HexConstants.ArrayToWorld(x, y, Scale), hiddenCells.getTextureRandom()
+				)
 			cellArray[y][x].scale = Vector2(Scale, Scale)
 			cellContainer.add_child(cellArray[y][x])
 			cellContainer.position = Offset * Scale
 
-	
 
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_ESCAPE:
+			get_tree().quit()
+	elif event is InputEventMouseButton and event.pressed:
+		print("Mouse pressed screen: %s, world: %s" % [event.position, get_global_mouse_position()])
