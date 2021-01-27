@@ -18,10 +18,17 @@ var validMoves
 
 
 func _ready():
+	gridX = 0
+	gridY = 0
 	position = Grid.Offset * Grid.Scale + HexConstants.ArrayToWorld(gridX, gridY, Grid.Scale)
 	scale = Vector2(Grid.Scale, Grid.Scale)
+
+
+func load():
 	updateValidMoves()
 	updateArrows()
+
+	Grid.showNeighbours(0, 0)
 
 
 func _input(event):
@@ -53,6 +60,7 @@ func move(direction: int):
 	print("Moved to [%s, %s]" % [gridX, gridY])
 	updateValidMoves()
 	updateArrows()
+	Grid.showNeighbours(gridX, gridY)
 
 	""" 
 	//Update player sprites

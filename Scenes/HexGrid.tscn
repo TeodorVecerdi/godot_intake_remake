@@ -17,7 +17,7 @@
 script = ExtResource( 1 )
 CellsX = 8
 CellsY = 8
-Scale = 0.5
+Scale = 1.0
 Offset = Vector2( 45, 50.5 )
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -38,4 +38,3 @@ Textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 position = Vector2( 24, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
-position = Vector2( 0, 0 )
