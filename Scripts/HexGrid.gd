@@ -1,13 +1,19 @@
 extends Node2D
+class_name HexGrid
 
-export (int) var CellsX: int = 32
-export (int) var CellsY: int = 32
+const HexConstants = preload("res://Scripts/HexConstants.gd")
+const HexCell = preload("res://Scenes/HexCell.tscn")
 
-# Called when the node enters the scene tree for the first time.
+export (int) var CellsX: int = 4
+export (int) var CellsY: int = 4
+
+onready var normalCells: HexCellTexture = $CellTiles
+onready var hiddenCells: HexCellTexture = $HiddenTiles
+onready var finishCells: HexCellTexture = $FinishTiles
+
+
 func _ready():
-	pass # Replace with function body.
+	var hexCell = HexCell.instance()
+	hexCell.initialize(Vector2(100, 100), normalCells.getTextureRandom())
+	add_child(hexCell)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
