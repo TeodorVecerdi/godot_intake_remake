@@ -3,38 +3,56 @@ class_name PlayerController
 
 const HexConstants = preload("res://Scripts/HexConstants.gd")
 onready var Grid: HexGrid = $".".get_parent() as HexGrid
+onready var Arrows = [
+	$Arrows/arrow_up_right,
+	$Arrows/arrow_right,
+	$Arrows/arrow_down_right,
+	$Arrows/arrow_down_left,
+	$Arrows/arrow_left,
+	$Arrows/arrow_up_left
+]
+
 var gridX: int
 var gridY: int
+var validMoves
 
 
 func _ready():
 	position = Grid.Offset * Grid.Scale + HexConstants.ArrayToWorld(gridX, gridY, Grid.Scale)
 	scale = Vector2(Grid.Scale, Grid.Scale)
+	updateValidMoves()
+	updateArrows()
 
 
 func _input(event):
 	var justPressed = event.is_pressed() and not event.is_echo()
 	if not justPressed:
 		return
-	
-	if Input.is_key_pressed(KEY_C):
+
+	if Input.is_key_pressed(KEY_E):
 		move(0)
-	elif Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_D):
 		move(1)
-	elif Input.is_key_pressed(KEY_E):
+	if Input.is_key_pressed(KEY_C):
 		move(2)
-	elif Input.is_key_pressed(KEY_Q):
+	if Input.is_key_pressed(KEY_Z):
 		move(3)
-	elif Input.is_key_pressed(KEY_A):
+	if Input.is_key_pressed(KEY_A):
 		move(4)
-	elif Input.is_key_pressed(KEY_Z):
+	if Input.is_key_pressed(KEY_Q):
 		move(5)
 
 
 func move(direction: int):
+	if not validMoves[direction]:
+		return
+
 	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
+	print("Moved to [%s, %s]" % [gridX, gridY])
+	updateValidMoves()
+	updateArrows()
 
 	""" 
 	//Update player sprites
@@ -47,3 +65,12 @@ func move(direction: int):
 	if (direction == 1) // right sprite
 		PlayerSprite.sprite = PlayerSprites[3];
 	"""
+
+
+func updateValidMoves():
+	validMoves = Grid.getPassableNeighbours(gridX, gridY)
+
+
+func updateArrows() -> void:
+	for i in range(len(Arrows)):
+		Arrows[i].visible = validMoves[i]

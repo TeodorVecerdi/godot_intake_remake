@@ -15,8 +15,8 @@
 
 [node name="HexGrid" type="Node2D"]
 script = ExtResource( 1 )
-CellsX = 32
-CellsY = 32
+CellsX = 8
+CellsY = 8
 Scale = 0.5
 Offset = Vector2( 45, 50.5 )
 
@@ -38,3 +38,4 @@ Textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
 position = Vector2( 24, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0, 0 )
