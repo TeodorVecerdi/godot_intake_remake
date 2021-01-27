@@ -42,4 +42,6 @@ func _unhandled_input(event):
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			get_tree().quit()
 	elif event is InputEventMouseButton and event.pressed:
-		print("Mouse pressed screen: %s, world: %s" % [event.position, get_global_mouse_position()])
+		var coords = get_global_mouse_position()
+		var offsetted = coords + Offset * Scale
+		print("Mouse pressed world->array: %s" % [HexConstants.WorldToArray(offsetted.x, offsetted.y, Scale)])
