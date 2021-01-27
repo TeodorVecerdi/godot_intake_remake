@@ -34,6 +34,11 @@ func _ready() -> void:
 			cellContainer.add_child(cellGrid[y][x])
 			cellContainer.position = Offset * Scale
 
+	for y in range(CellsY):
+		for x in range(CellsX):
+			for dir in range(6):
+				var wall = randi() % 3 == 0
+				setWall(dir, wall, x, y)
 	player.load()
 
 
@@ -53,43 +58,42 @@ func _unhandled_input(event) -> void:
 
 
 func getPassableNeighbours(x: int, y: int) -> Array:
-	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var upper_right = (
 		false
 		if y == 0 or (x == CellsX - 1 and y % 2 == 1)
-		else isPassable(x, y, x + neighbourDeltas[0][0], y + neighbourDeltas[0][1])
+		else isPassable(x, y, 0)
 	)
 	var right = (
 		false
 		if x == CellsX - 1
-		else isPassable(x, y, x + neighbourDeltas[1][0], y + neighbourDeltas[1][1])
+		else isPassable(x, y, 1)
 	)
 	var lower_right = (
 		false
 		if y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1)
-		else isPassable(x, y, x + neighbourDeltas[2][0], y + neighbourDeltas[2][1])
+		else isPassable(x, y, 2)
 	)
 	var lower_left = (
 		false
 		if y == CellsX - 1 or (x == 0 and y % 2 == 0)
-		else isPassable(x, y, x + neighbourDeltas[3][0], y + neighbourDeltas[3][1])
+		else isPassable(x, y, 3)
 	)
 	var left = (
 		false
 		if x == 0
-		else isPassable(x, y, x + neighbourDeltas[4][0], y + neighbourDeltas[4][1])
+		else isPassable(x, y, 4)
 	)
 	var upper_left = (
 		false
 		if y == 0 or (x == 0 and y % 2 == 0)
-		else isPassable(x, y, x + neighbourDeltas[5][0], y + neighbourDeltas[5][1])
+		else isPassable(x, y, 5)
 	)
 
 	return [upper_right, right, lower_right, lower_left, left, upper_left]
 
 
-func isPassable(fromX: int, fromY: int, toX: int, toY: int) -> bool:
-	return true
+func isPassable(x: int, y: int, direction: int) -> bool:
+	return !cellGrid[y][x].walls[direction]
 
 
 func showNeighbours(x: int, y: int) -> void:
@@ -101,6 +105,21 @@ func showNeighbours(x: int, y: int) -> void:
 
 
 func setWall(index: int, state: bool, x: int, y: int):
+	if index == 0 && y == 0 or (x == CellsX - 1 and y % 2 == 1):
+		return
+	if index == 1 && x == CellsX - 1:
+		return
+	if index == 2 && y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1):
+		return
+	if index == 3 && y == CellsX - 1 or (x == 0 and y % 2 == 0):
+		return
+	if index == 4 && x == 0:
+		return
+	if index == 5 && y == 0 or (x == 0 and y % 2 == 0):
+		return
+	if index > 5:
+		return
+
 	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var otherX = x + neighbourDeltas[index][0]
 	var otherY = y + neighbourDeltas[index][1]
