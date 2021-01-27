@@ -3,13 +3,25 @@ class_name PlayerController
 
 const HexConstants = preload("res://Scripts/HexConstants.gd")
 onready var Grid: HexGrid = $".".get_parent() as HexGrid
+onready var Arrows = [
+	$Arrows/arrow_up_right,
+	$Arrows/arrow_right,
+	$Arrows/arrow_down_right,
+	$Arrows/arrow_down_left,
+	$Arrows/arrow_left,
+	$Arrows/arrow_up_left
+]
+
 var gridX: int
 var gridY: int
+var validMoves
 
 
 func _ready():
 	position = Grid.Offset * Grid.Scale + HexConstants.ArrayToWorld(gridX, gridY, Grid.Scale)
 	scale = Vector2(Grid.Scale, Grid.Scale)
+	updateValidMoves()
+	updateArrows()
 
 
 func _input(event):
@@ -32,9 +44,14 @@ func _input(event):
 
 
 func move(direction: int):
+	if not validMoves[direction]:
+		return
+
 	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
+	updateValidMoves()
+	updateArrows()
 
 	""" 
 	//Update player sprites
@@ -47,3 +64,19 @@ func move(direction: int):
 	if (direction == 1) // right sprite
 		PlayerSprite.sprite = PlayerSprites[3];
 	"""
+
+
+func updateValidMoves():
+	validMoves = [
+		randi() % 2 == 0,
+		randi() % 2 == 0,
+		randi() % 2 == 0,
+		randi() % 2 == 0,
+		randi() % 2 == 0,
+		randi() % 2 == 0
+	]
+
+
+func updateArrows() -> void:
+	for i in range(len(Arrows)):
+		Arrows[i].visible = validMoves[i]
