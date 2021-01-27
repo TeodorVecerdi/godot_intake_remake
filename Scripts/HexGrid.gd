@@ -33,7 +33,7 @@ func _ready() -> void:
 			cellGrid[y][x].scale = Vector2(Scale, Scale)
 			cellContainer.add_child(cellGrid[y][x])
 			cellContainer.position = Offset * Scale
-	
+
 	player.load()
 
 
@@ -59,7 +59,11 @@ func getPassableNeighbours(x: int, y: int) -> Array:
 		if y == 0 or (x == CellsX - 1 and y % 2 == 1)
 		else isPassable(x, y, x + neighbourDeltas[0][0], y + neighbourDeltas[0][1])
 	)
-	var right = false if x == CellsX - 1 else isPassable(x, y, x + neighbourDeltas[1][0], y + neighbourDeltas[1][1])
+	var right = (
+		false
+		if x == CellsX - 1
+		else isPassable(x, y, x + neighbourDeltas[1][0], y + neighbourDeltas[1][1])
+	)
 	var lower_right = (
 		false
 		if y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1)
@@ -70,7 +74,11 @@ func getPassableNeighbours(x: int, y: int) -> Array:
 		if y == CellsX - 1 or (x == 0 and y % 2 == 0)
 		else isPassable(x, y, x + neighbourDeltas[3][0], y + neighbourDeltas[3][1])
 	)
-	var left = false if x == 0 else isPassable(x, y, x + neighbourDeltas[4][0], y + neighbourDeltas[4][1])
+	var left = (
+		false
+		if x == 0
+		else isPassable(x, y, x + neighbourDeltas[4][0], y + neighbourDeltas[4][1])
+	)
 	var upper_left = (
 		false
 		if y == 0 or (x == 0 and y % 2 == 0)
@@ -85,8 +93,16 @@ func isPassable(fromX: int, fromY: int, toX: int, toY: int) -> bool:
 
 
 func showNeighbours(x: int, y: int) -> void:
-	var neighbourDeltas = HexConstants.NeighbourDelta[y%2]
+	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var passableNeighbours = getPassableNeighbours(x, y)
 	for i in range(6):
 		if passableNeighbours[i]:
-			cellGrid[y+neighbourDeltas[i][1]][x+neighbourDeltas[i][0]].setHidden(false)
+			cellGrid[y + neighbourDeltas[i][1]][x + neighbourDeltas[i][0]].setHidden(false)
+
+
+func setWall(index: int, state: bool, x: int, y: int):
+	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
+	var otherX = x + neighbourDeltas[index][0]
+	var otherY = y + neighbourDeltas[index][1]
+	cellGrid[y][x].setWall(index, state)
+	cellGrid[otherY][otherX].setWall((index+3)%6, state)
