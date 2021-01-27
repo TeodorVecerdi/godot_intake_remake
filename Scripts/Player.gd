@@ -16,18 +16,18 @@ func _input(event):
 	var justPressed = event.is_pressed() and not event.is_echo()
 	if not justPressed:
 		return
-	
-	if Input.is_key_pressed(KEY_C):
+
+	if Input.is_key_pressed(KEY_E):
 		move(0)
-	elif Input.is_key_pressed(KEY_D):
+	if Input.is_key_pressed(KEY_D):
 		move(1)
-	elif Input.is_key_pressed(KEY_E):
+	if Input.is_key_pressed(KEY_C):
 		move(2)
-	elif Input.is_key_pressed(KEY_Q):
+	if Input.is_key_pressed(KEY_Z):
 		move(3)
-	elif Input.is_key_pressed(KEY_A):
+	if Input.is_key_pressed(KEY_A):
 		move(4)
-	elif Input.is_key_pressed(KEY_Z):
+	if Input.is_key_pressed(KEY_Q):
 		move(5)
 
 
