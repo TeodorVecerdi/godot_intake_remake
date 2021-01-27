@@ -6,9 +6,14 @@
 
 [node name="HexCell" type="Sprite"]
 texture = ExtResource( 2 )
+region_rect = Rect2( -8, -8, 192, 218 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Walls" type="Node2D" parent="."]
+z_index = 1
 
 [node name="wall_up_right" type="Sprite" parent="Walls"]
 self_modulate = Color( 0.2, 0.2, 0.2, 1 )

@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Intake Remake"
+run/main_scene="res://Scenes/HexGrid.tscn"
 config/icon="res://icon.png"
 
 [rendering]

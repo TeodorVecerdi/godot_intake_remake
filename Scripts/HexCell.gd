@@ -1,14 +1,7 @@
 extends Sprite
 class_name HexCell
 
-onready var Walls = [
-	$Walls/wall_up_right,
-	$Walls/wall_right,
-	$Walls/wall_down_right,
-	$Walls/wall_down_left,
-	$Walls/wall_left,
-	$Walls/wall_up_left
-]
+var Walls = []
 
 var textureVariation
 var isHidden
@@ -20,6 +13,13 @@ var walls = [true, true, true, true, true, true]
 
 
 func initialize(position: Vector2, variation: int, hidden: bool = true) -> void:
+	Walls.append($Walls/wall_up_right)
+	Walls.append($Walls/wall_right)
+	Walls.append($Walls/wall_down_right)
+	Walls.append($Walls/wall_down_left)
+	Walls.append($Walls/wall_left)
+	Walls.append($Walls/wall_up_left)
+
 	textureVariation = variation
 	isHidden = hidden
 	self.position = position
@@ -28,11 +28,14 @@ func initialize(position: Vector2, variation: int, hidden: bool = true) -> void:
 
 
 func setTexture() -> void:
-	texture = (
-		hiddenTextures.getTexture(textureVariation)
-		if isHidden
-		else shownTextures.getTexture(textureVariation)
-	)
+	if isHidden:
+		texture = hiddenTextures.getTexture(textureVariation)
+		for i in range(6):
+			Walls[i].visible = false
+	else:
+		texture = shownTextures.getTexture(textureVariation)
+		for i in range(6):
+			Walls[i].visible = walls[i]
 
 
 func loadTextures(_hiddenTextures: HexCellTexture, _shownTextures: HexCellTexture) -> void:
@@ -47,4 +50,7 @@ func setHidden(hidden: bool):
 
 func setWall(index: int, state: bool):
 	walls[index] = state
-	Walls[index].visible = state
+	if isHidden:
+		Walls[index].visible = false
+	else:
+		Walls[index].visible = walls[index]

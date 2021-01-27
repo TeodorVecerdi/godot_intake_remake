@@ -29,7 +29,7 @@ func _ready() -> void:
 			var shownTextures = normalCells if texType == 0 else finishCells
 
 			cellGrid[y][x].loadTextures(hiddenCells, shownTextures)
-			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation)
+			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation, false)
 			cellGrid[y][x].scale = Vector2(Scale, Scale)
 			cellContainer.add_child(cellGrid[y][x])
 			cellContainer.position = Offset * Scale
@@ -39,6 +39,7 @@ func _ready() -> void:
 			for dir in range(6):
 				var wall = randi() % 3 == 0
 				setWall(dir, wall, x, y)
+
 	player.load()
 
 
@@ -97,6 +98,7 @@ func isPassable(x: int, y: int, direction: int) -> bool:
 
 
 func showNeighbours(x: int, y: int) -> void:
+	cellGrid[y][x].setHidden(false)
 	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var passableNeighbours = getPassableNeighbours(x, y)
 	for i in range(6):
