@@ -13,31 +13,31 @@ onready var normalCells: HexCellTexture = $Tiles/CellTiles
 onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
 onready var cellContainer = $Cells
+onready var player = $Player
 
-var cellArray
+var cellGrid
 
 
-func _ready():
-	cellArray = []
+func _ready() -> void:
+	cellGrid = []
 	for y in range(CellsY):
-		cellArray.append([])
+		cellGrid.append([])
 		for x in range(CellsX):
-			cellArray[y].append(HexCell.instance())
+			cellGrid[y].append(HexCell.instance())
+			var texVariation = randi() % 3
 			var texType = randi() % 2
-			if texType == 0:
-				cellArray[y][x].initialize(
-					HexConstants.ArrayToWorld(x, y, Scale), normalCells.getTextureRandom()
-				)
-			else:
-				cellArray[y][x].initialize(
-					HexConstants.ArrayToWorld(x, y, Scale), hiddenCells.getTextureRandom()
-				)
-			cellArray[y][x].scale = Vector2(Scale, Scale)
-			cellContainer.add_child(cellArray[y][x])
+			var shownTextures = normalCells if texType == 0 else finishCells
+
+			cellGrid[y][x].loadTextures(hiddenCells, shownTextures)
+			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation)
+			cellGrid[y][x].scale = Vector2(Scale, Scale)
+			cellContainer.add_child(cellGrid[y][x])
 			cellContainer.position = Offset * Scale
+	
+	player.load()
 
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			get_tree().quit()
@@ -52,15 +52,41 @@ func _unhandled_input(event):
 		)
 
 
-func getPassableNeighbours(x: int, y: int):
-	var upper_right = false if y == 0 or (x == CellsX-1 and y%2==1) else isPassable(x, y, x + y % 2, y-1)
-	var right = false if x == CellsX - 1 else isPassable(x, y, x+1, y)
-	var lower_right = false if y == CellsY - 1 or (x == CellsX-1 and y%2==1) else isPassable(x, y, x + y % 2, y+1)
-	var lower_left = false if y == CellsX - 1 or (x == 0 and y%2==0) else isPassable(x, y, x + (y+1) % 2, y+1)
-	var left = false if x == 0 else isPassable(x, y, x-1, y)
-	var upper_left = false if y == 0 or (x == 0 and y%2 == 0) else isPassable(x, y, x + (y+1) % 2, y-1)
+func getPassableNeighbours(x: int, y: int) -> Array:
+	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
+	var upper_right = (
+		false
+		if y == 0 or (x == CellsX - 1 and y % 2 == 1)
+		else isPassable(x, y, x + neighbourDeltas[0][0], y + neighbourDeltas[0][1])
+	)
+	var right = false if x == CellsX - 1 else isPassable(x, y, x + neighbourDeltas[1][0], y + neighbourDeltas[1][1])
+	var lower_right = (
+		false
+		if y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1)
+		else isPassable(x, y, x + neighbourDeltas[2][0], y + neighbourDeltas[2][1])
+	)
+	var lower_left = (
+		false
+		if y == CellsX - 1 or (x == 0 and y % 2 == 0)
+		else isPassable(x, y, x + neighbourDeltas[3][0], y + neighbourDeltas[3][1])
+	)
+	var left = false if x == 0 else isPassable(x, y, x + neighbourDeltas[4][0], y + neighbourDeltas[4][1])
+	var upper_left = (
+		false
+		if y == 0 or (x == 0 and y % 2 == 0)
+		else isPassable(x, y, x + neighbourDeltas[5][0], y + neighbourDeltas[5][1])
+	)
 
 	return [upper_right, right, lower_right, lower_left, left, upper_left]
-	
-func isPassable(fromX: int, fromY: int, toX: int, toY: int)->bool:
+
+
+func isPassable(fromX: int, fromY: int, toX: int, toY: int) -> bool:
 	return true
+
+
+func showNeighbours(x: int, y: int) -> void:
+	var neighbourDeltas = HexConstants.NeighbourDelta[y%2]
+	var passableNeighbours = getPassableNeighbours(x, y)
+	for i in range(6):
+		if passableNeighbours[i]:
+			cellGrid[y+neighbourDeltas[i][1]][x+neighbourDeltas[i][0]].setHidden(false)
