@@ -50,6 +50,7 @@ func move(direction: int):
 	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
+	print("Moved to [%s, %s]" % [gridX, gridY])
 	updateValidMoves()
 	updateArrows()
 
@@ -67,14 +68,7 @@ func move(direction: int):
 
 
 func updateValidMoves():
-	validMoves = [
-		randi() % 2 == 0,
-		randi() % 2 == 0,
-		randi() % 2 == 0,
-		randi() % 2 == 0,
-		randi() % 2 == 0,
-		randi() % 2 == 0
-	]
+	validMoves = Grid.getPassableNeighbours(gridX, gridY)
 
 
 func updateArrows() -> void:
