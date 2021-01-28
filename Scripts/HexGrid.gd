@@ -27,8 +27,6 @@ func _ready() -> void:
 	generateMaze()
 
 	player.load()
-	showNeighbours(0, 0)
-	showNeighbours(goalX, goalY)
 
 
 func _unhandled_input(event) -> void:
@@ -65,11 +63,14 @@ func _onTimerReady():
 func generateMaze() -> void:
 	resetMaze()
 	generateMazeWalls()
-	#hideAdjacentWalls()
+	hideAdjacentWalls()
 
 	for y in range(CellsY):
 		for x in range(CellsX):
 			cellGrid[y][x].setTexture()
+
+	showNeighbours(0, 0)
+	showCell(goalX, goalY)
 
 
 func resetMaze() -> void:
@@ -98,7 +99,6 @@ func resetMaze() -> void:
 
 
 func generateMazeWalls() -> void:
-	print("START VISITED")
 	var visited = []
 	for y in range(CellsY):
 		visited.append([])
