@@ -9,10 +9,6 @@ position = Vector2( 0, 1.25992 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 1.5, 1.5 )
-
 [node name="Arrows" type="Node2D" parent="."]
 
 [node name="arrow_up_right" type="Sprite" parent="Arrows"]
