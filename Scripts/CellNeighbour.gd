@@ -1,9 +1,18 @@
 extends Node2D
 class_name CellNeighbour
 
-var cellIndex: CellIndex
+var x: int
+var y: int
 var direction: int
 
-func init(_cellIndex: CellIndex, _direction: int) -> void:
-    cellIndex = _cellIndex
-    direction = _direction
+
+func initCIdx(_cellIndex: CellIndex, _direction: int) -> void:
+	x = _cellIndex.x
+	y = _cellIndex.y
+	direction = _direction
+
+
+func initXY(_x: int, _y: int, _direction: int) -> void:
+	x = _x
+	y = _y
+	direction = _direction
