@@ -1,7 +1,7 @@
 extends Sprite
 class_name PlayerController
 
-onready var Grid: HexGrid = $".".get_parent() as HexGrid
+onready var Grid = $".".get_parent()
 onready var Arrows = [
 	$Arrows/arrow_up_right,
 	$Arrows/arrow_right,
@@ -28,8 +28,6 @@ func _ready():
 func load():
 	updateValidMoves()
 	updateArrows()
-
-	Grid.showNeighbours(0, 0)
 
 
 func _input(event):
