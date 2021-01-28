@@ -143,6 +143,11 @@ func _onPlayerMoved(gridX: int, gridY: int):
 		print("Player reached goal!")
 
 
+func _onCameraZoomChanged(state):
+	player.lockMovement(state)
+	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
+
+
 func rangeCheck(index: int, x: int, y: int) -> bool:
 	return not (
 		(index == 0 && y == 0 or (x == CellsX - 1 and y % 2 == 1))
