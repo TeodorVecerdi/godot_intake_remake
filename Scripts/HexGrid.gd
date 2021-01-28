@@ -165,12 +165,11 @@ func setWall(index: int, state: bool, x: int, y: int):
 
 func rangeCheck(index: int, x: int, y: int) -> bool:
 	return not (
-		(index == 0 && y == 0 or (x == CellsX - 1 and y % 2 == 1))
+		(index == 0 && (y == 0 or (x == CellsX - 1 and y % 2 == 1)))
 		or (index == 1 && x == CellsX - 1)
-		or (index == 2 && y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1))
-		or (index == 3 && y == CellsX - 1 or (x == 0 and y % 2 == 0))
+		or (index == 2 && (y == CellsY - 1 or (x == CellsX - 1 and y % 2 == 1)))
+		or (index == 3 && (y == CellsX - 1 or (x == 0 and y % 2 == 0)))
 		or (index == 4 && x == 0)
-		or (index == 5 && y == 0 or (x == 0 and y % 2 == 0))
+		or (index == 5 && (y == 0 or (x == 0 and y % 2 == 0)))
 		or (index > 5)
 	)
-
