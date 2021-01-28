@@ -80,8 +80,6 @@ func _ready() -> void:
 	showNeighbours(0, 0)
 	showNeighbours(goalX, goalY)
 
-	timer.start(10.0)
-
 
 func _unhandled_input(event) -> void:
 	if event is InputEventKey:
@@ -109,6 +107,10 @@ func _onTimerCompleted():
 func _onTimerStopped():
 	pass
 
+
+func _onTimerReady():
+	timer.start(15.0)
+	
 
 func getPassableNeighboursBool(x: int, y: int) -> Array:
 	var upper_right = false if y == 0 or (x == CellsX - 1 and y % 2 == 1) else isPassable(x, y, 0)
@@ -171,3 +173,4 @@ func rangeCheck(index: int, x: int, y: int) -> bool:
 		or (index == 5 && y == 0 or (x == 0 and y % 2 == 0))
 		or (index > 5)
 	)
+

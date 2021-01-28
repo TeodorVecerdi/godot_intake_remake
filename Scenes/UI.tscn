@@ -16,6 +16,9 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+GoodColor = Color( 0.0509804, 0.796078, 0.152941, 1 )
+WarningColor = Color( 0.866667, 0.670588, 0.0862745, 1 )
+BadColor = Color( 0.921569, 0.211765, 0.0470588, 1 )
 
 [node name="Timer" type="Control" parent="."]
 anchor_right = 1.0
