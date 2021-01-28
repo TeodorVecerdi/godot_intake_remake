@@ -1,8 +1,55 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/LevelTimer.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Control" parent="."]
+anchor_right = 1.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerProgress" type="TextureProgress" parent="Timer"]
+anchor_right = 1.0
+margin_left = 64.0
+margin_top = 48.0
+margin_right = -64.0
+margin_bottom = 80.0
+max_value = 1.0
+step = 0.001
+value = 0.461
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 1 )
+tint_progress = Color( 0.282353, 0.905882, 0, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerText" type="Label" parent="Timer"]
+anchor_right = 1.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 1 )
+text = "00s / 60s"
+align = 1
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
