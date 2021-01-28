@@ -18,5 +18,5 @@ func _ready():
 	limit_right = maxWidth + limitPadding.x
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	position = target.position
