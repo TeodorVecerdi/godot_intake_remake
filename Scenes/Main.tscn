@@ -20,4 +20,5 @@ CellsY = 8
 size_flags_horizontal = 2
 size_flags_vertical = 2
 [connection signal="completed" from="UI Canvas/UI" to="Game" method="_onTimerCompleted"]
+[connection signal="ready" from="UI Canvas/UI" to="Game" method="_onTimerReady"]
 [connection signal="stopped" from="UI Canvas/UI" to="Game" method="_onTimerStopped"]
