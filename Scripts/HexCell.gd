@@ -40,12 +40,14 @@ func setTexture() -> void:
 func showWalls() -> void:
 	for i in range(6):
 		if isHidden:
-			Walls[i].visible = true if showWallOverride[i] else false
+			Walls[i].visible = true if showWallOverride[i] and walls[i] and not hiddenWalls[i] else false
 		else:
 			Walls[i].visible = walls[i] if not hiddenWalls[i] else false
 
 
 func showWall(index: int) -> void:
+	if not walls[index] or hiddenWalls[index]:
+		return
 	showWallOverride[index] = true
 	Walls[index].visible = true
 
