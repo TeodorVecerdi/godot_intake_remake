@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "CellIndex",
+"language": "GDScript",
+"path": "res://Scripts/CellIndex.gd"
+}, {
+"base": "Reference",
+"class": "CellNeighbour",
+"language": "GDScript",
+"path": "res://Scripts/CellNeighbour.gd"
+}, {
 "base": "Sprite",
 "class": "HexCell",
 "language": "GDScript",
@@ -28,17 +38,26 @@ _global_script_classes=[ {
 "class": "HexGrid",
 "language": "GDScript",
 "path": "res://Scripts/HexGrid.gd"
+}, {
+"base": "Sprite",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"CellIndex": "",
+"CellNeighbour": "",
 "HexCell": "",
 "HexCellTexture": "",
 "HexConstants": "",
-"HexGrid": ""
+"HexGrid": "",
+"PlayerController": ""
 }
 
 [application]
 
 config/name="Intake Remake"
+run/main_scene="res://Scenes/HexGrid.tscn"
 config/icon="res://icon.png"
 
 [rendering]
