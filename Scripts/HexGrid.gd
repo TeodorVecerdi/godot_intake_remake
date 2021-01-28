@@ -144,6 +144,7 @@ func _onPlayerMoved(gridX: int, gridY: int):
 
 
 func _onCameraZoomChanged(state):
+	player.lockMovement(state)
 	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
 
 

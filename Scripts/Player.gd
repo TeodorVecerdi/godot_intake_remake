@@ -16,6 +16,7 @@ signal moved(gridX, gridY)
 var gridX: int
 var gridY: int
 var validMoves
+var movementLocked = false
 
 
 func _ready():
@@ -32,7 +33,7 @@ func load():
 
 func _input(event):
 	var justPressed = event.is_pressed() and not event.is_echo()
-	if not justPressed:
+	if not justPressed or movementLocked:
 		return
 
 	if Input.is_key_pressed(KEY_E):
@@ -78,6 +79,14 @@ func updateValidMoves():
 	validMoves = Grid.getPassableNeighboursBool(gridX, gridY)
 
 
+func lockMovement(state):
+	movementLocked = state
+	if not state:
+		updateArrows()
+	else:
+		for i in range(6):
+			Arrows[i].visible = false
+
 func updateArrows() -> void:
-	for i in range(len(Arrows)):
+	for i in range(6):
 		Arrows[i].visible = validMoves[i]
