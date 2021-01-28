@@ -16,6 +16,7 @@ onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
 onready var cellContainer = $Cells
 onready var player: PlayerController = $Player
+onready var timer = $"../UI Canvas/UI"
 
 var cellGrid
 var goalX: int
@@ -79,11 +80,34 @@ func _ready() -> void:
 	showNeighbours(0, 0)
 	showNeighbours(goalX, goalY)
 
+	timer.start(10.0)
+
 
 func _unhandled_input(event) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			get_tree().quit()
+
+
+func _onPlayerMoved(gridX: int, gridY: int):
+	print("Player moved to [%s, %s]" % [gridX, gridY])
+	if gridX == goalX and gridY == goalY:
+		print("Player reached goal!")
+		timer.stop()
+
+
+func _onCameraZoomChanged(state):
+	player.lockMovement(state)
+	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
+
+
+func _onTimerCompleted():
+	print("Time ran out")
+	player.lockMovement(true)
+
+
+func _onTimerStopped():
+	pass
 
 
 func getPassableNeighboursBool(x: int, y: int) -> Array:
@@ -135,17 +159,6 @@ func setWall(index: int, state: bool, x: int, y: int):
 	var otherY = y + neighbourDeltas[index][1]
 	cellGrid[y][x].setWall(index, state)
 	cellGrid[otherY][otherX].setWall((index + 3) % 6, state)
-
-
-func _onPlayerMoved(gridX: int, gridY: int):
-	print("Player moved to [%s, %s]" % [gridX, gridY])
-	if gridX == goalX and gridY == goalY:
-		print("Player reached goal!")
-
-
-func _onCameraZoomChanged(state):
-	player.lockMovement(state)
-	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
 
 
 func rangeCheck(index: int, x: int, y: int) -> bool:

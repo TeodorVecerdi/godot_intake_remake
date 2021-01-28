@@ -14,8 +14,10 @@ __meta__ = {
 CellsX = 8
 CellsY = 8
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI Canvas" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource( 2 )]
+[node name="UI" parent="UI Canvas" instance=ExtResource( 2 )]
 size_flags_horizontal = 2
 size_flags_vertical = 2
+[connection signal="completed" from="UI Canvas/UI" to="Game" method="_onTimerCompleted"]
+[connection signal="stopped" from="UI Canvas/UI" to="Game" method="_onTimerStopped"]
