@@ -1,0 +1,77 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Camera2D",
+"class": "CameraFollow",
+"language": "GDScript",
+"path": "res://Scripts/CameraFollow.gd"
+}, {
+"base": "Node2D",
+"class": "CellIndex",
+"language": "GDScript",
+"path": "res://Scripts/CellIndex.gd"
+}, {
+"base": "Node2D",
+"class": "CellNeighbour",
+"language": "GDScript",
+"path": "res://Scripts/CellNeighbour.gd"
+}, {
+"base": "Sprite",
+"class": "HexCell",
+"language": "GDScript",
+"path": "res://Scripts/HexCell.gd"
+}, {
+"base": "Node2D",
+"class": "HexCellTexture",
+"language": "GDScript",
+"path": "res://Scripts/HexCellTexture.gd"
+}, {
+"base": "Reference",
+"class": "HexConstants",
+"language": "GDScript",
+"path": "res://Scripts/HexConstants.gd"
+}, {
+"base": "Node2D",
+"class": "HexGrid",
+"language": "GDScript",
+"path": "res://Scripts/HexGrid.gd"
+}, {
+"base": "Control",
+"class": "LevelTimer",
+"language": "GDScript",
+"path": "res://Scripts/LevelTimer.gd"
+}, {
+"base": "Sprite",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+} ]
+_global_script_class_icons={
+"CameraFollow": "",
+"CellIndex": "",
+"CellNeighbour": "",
+"HexCell": "",
+"HexCellTexture": "",
+"HexConstants": "",
+"HexGrid": "",
+"LevelTimer": "",
+"PlayerController": ""
+}
+
+[application]
+
+config/name="Intake Remake"
+run/main_scene="res://Scenes/Main.tscn"
+config/icon="res://icon.png"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

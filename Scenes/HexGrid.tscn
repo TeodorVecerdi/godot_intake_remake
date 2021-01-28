@@ -1,0 +1,62 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scripts/HexGrid.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HexCellTexture.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Tiles/Finish1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Tiles/Finish2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Tiles/Finish3.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Tiles/Hidden1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Tiles/Hidden2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Tiles/Hidden3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Tiles/Cell2.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Tiles/Cell1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Tiles/Cell3.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/CameraFollow.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=14]
+
+[node name="HexGrid" type="Node2D"]
+script = ExtResource( 1 )
+CellsX = 32
+CellsY = 32
+Offset = Vector2( 45, 50.5 )
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="CellTiles" type="Node2D" parent="Tiles"]
+script = ExtResource( 2 )
+Textures = [ ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ]
+
+[node name="HiddenTiles" type="Node2D" parent="Tiles"]
+script = ExtResource( 2 )
+Textures = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+
+[node name="FinishTiles" type="Node2D" parent="Tiles"]
+script = ExtResource( 2 )
+Textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="Cells" type="Node2D" parent="."]
+position = Vector2( 24, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 12 )]
+position = Vector2( 0, 4.43472 )
+z_index = 2
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.180392, 0.180392, 0.180392, 1 )
+position = Vector2( 20.5924, 7.69165 )
+scale = Vector2( 10000, 10000 )
+z_index = -1
+texture = ExtResource( 14 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 3.7
+script = ExtResource( 13 )
+followSpeed = 4.0
+limitPadding = Vector2( 250, 200 )
+[connection signal="moved" from="Player" to="." method="_onPlayerMoved"]
+[connection signal="zoomChanged" from="Camera" to="." method="_onCameraZoomChanged"]
