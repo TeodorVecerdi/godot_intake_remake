@@ -39,6 +39,7 @@ func _onPlayerMoved(gridX: int, gridY: int):
 	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
 		print("Player reached goal!")
+		showAll()
 		timer.stop()
 
 
