@@ -10,9 +10,10 @@ var hiddenTextures: HexCellTexture
 var shownTextures: HexCellTexture
 
 var walls = [true, true, true, true, true, true]
+var hiddenWalls = [false, false, false, false, false, false]
+var cellIndex: CellIndex
 
-
-func initialize(position: Vector2, variation: int, hidden: bool = true) -> void:
+func initialize(position: Vector2, variation: int, _cellIndex: CellIndex, hidden: bool = true) -> void:
 	Walls.append($Walls/wall_up_right)
 	Walls.append($Walls/wall_right)
 	Walls.append($Walls/wall_down_right)
@@ -23,8 +24,7 @@ func initialize(position: Vector2, variation: int, hidden: bool = true) -> void:
 	textureVariation = variation
 	isHidden = hidden
 	self.position = position
-
-	setTexture()
+	cellIndex = _cellIndex
 
 
 func setTexture() -> void:
@@ -35,7 +35,7 @@ func setTexture() -> void:
 	else:
 		texture = shownTextures.getTexture(textureVariation)
 		for i in range(6):
-			Walls[i].visible = walls[i]
+			Walls[i].visible = walls[i] if not hiddenWalls[i] else false
 
 
 func loadTextures(_hiddenTextures: HexCellTexture, _shownTextures: HexCellTexture) -> void:
