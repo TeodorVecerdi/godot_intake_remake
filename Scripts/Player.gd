@@ -1,5 +1,10 @@
-extends Sprite
+extends Node2D
 class_name PlayerController
+
+export (Texture) var Front: Texture
+export (Texture) var Back: Texture
+export (Texture) var Left: Texture
+export (Texture) var Right: Texture
 
 onready var Grid = $".".get_parent()
 onready var Arrows = [
@@ -10,6 +15,8 @@ onready var Arrows = [
 	$Arrows/arrow_left,
 	$Arrows/arrow_up_left
 ]
+
+onready var PlayerSprite = $PlayerSprite
 
 signal moved(gridX, gridY)
 
@@ -62,17 +69,16 @@ func move(direction: int):
 	updateArrows()
 	Grid.showNeighbours(gridX, gridY)
 
-	""" 
-	//Update player sprites
-	if (direction == 2 || direction == 3) // front sprite
-		PlayerSprite.sprite = PlayerSprites[0];
-	if (direction == 0 || direction == 5) // back sprite
-		PlayerSprite.sprite = PlayerSprites[1];
-	if (direction == 4) // left sprite
-		PlayerSprite.sprite = PlayerSprites[2];
-	if (direction == 1) // right sprite
-		PlayerSprite.sprite = PlayerSprites[3];
-	"""
+	# Update player sprites
+	if direction == 2 or direction == 3: # front sprite
+		PlayerSprite.texture = Front;
+	elif direction == 0 or direction == 5: # back sprite
+		PlayerSprite.texture = Back;
+	elif direction == 4: # left sprite
+		PlayerSprite.texture = Left;
+	else: # right sprite
+		PlayerSprite.texture = Right;
+	
 
 
 func updateValidMoves():
