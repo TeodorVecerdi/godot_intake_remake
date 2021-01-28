@@ -1,7 +1,7 @@
 extends Sprite
 class_name PlayerController
 
-onready var Grid: HexGrid = $".".get_parent() as HexGrid
+onready var Grid = $".".get_parent()
 onready var Arrows = [
 	$Arrows/arrow_up_right,
 	$Arrows/arrow_right,
@@ -10,6 +10,8 @@ onready var Arrows = [
 	$Arrows/arrow_left,
 	$Arrows/arrow_up_left
 ]
+
+signal moved(gridX, gridY)
 
 var gridX: int
 var gridY: int
@@ -26,8 +28,6 @@ func _ready():
 func load():
 	updateValidMoves()
 	updateArrows()
-
-	Grid.showNeighbours(0, 0)
 
 
 func _input(event):
@@ -56,7 +56,7 @@ func move(direction: int):
 	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
-	print("Moved to [%s, %s]" % [gridX, gridY])
+	emit_signal("moved", gridX, gridY)
 	updateValidMoves()
 	updateArrows()
 	Grid.showNeighbours(gridX, gridY)

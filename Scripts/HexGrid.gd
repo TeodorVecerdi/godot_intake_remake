@@ -15,25 +15,32 @@ onready var normalCells: HexCellTexture = $Tiles/CellTiles
 onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
 onready var cellContainer = $Cells
-onready var player = $Player
+onready var player: PlayerController = $Player
 
 var cellGrid
+var goalX: int
+var goalY: int
 
 
 func _ready() -> void:
 	cellGrid = []
+
+	goalX = randi() % CellsX
+	goalY = randi() % CellsY
+
 	# First pass - generate cells
 	for y in range(CellsY):
 		cellGrid.append([])
 		for x in range(CellsX):
 			cellGrid[y].append(HexCell.instance())
 			var texVariation = randi() % 3
-			var texType = randi() % 2
-			var shownTextures = normalCells if texType == 0 else finishCells
 
 			var index = CellIndex.new()
 			index.init(x, y)
-			cellGrid[y][x].loadTextures(hiddenCells, shownTextures)
+			if x == goalX and y == goalY:
+				cellGrid[y][x].loadTextures(hiddenCells, finishCells)
+			else:
+				cellGrid[y][x].loadTextures(hiddenCells, normalCells)
 			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation, index)
 			cellGrid[y][x].scale = Vector2(Scale, Scale)
 			cellContainer.add_child(cellGrid[y][x])
@@ -68,6 +75,9 @@ func _ready() -> void:
 			cellGrid[y][x].setTexture()
 
 	player.load()
+
+	showNeighbours(0, 0)
+	showNeighbours(goalX, goalY)
 
 
 func _unhandled_input(event) -> void:
@@ -125,6 +135,12 @@ func setWall(index: int, state: bool, x: int, y: int):
 	var otherY = y + neighbourDeltas[index][1]
 	cellGrid[y][x].setWall(index, state)
 	cellGrid[otherY][otherX].setWall((index + 3) % 6, state)
+
+
+func _onPlayerMoved(gridX: int, gridY: int):
+	print("Player moved to [%s, %s]" % [gridX, gridY])
+	if gridX == goalX and gridY == goalY:
+		print("Player reached goal!")
 
 
 func rangeCheck(index: int, x: int, y: int) -> bool:
