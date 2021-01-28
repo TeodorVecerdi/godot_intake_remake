@@ -74,6 +74,10 @@ func generateMaze() -> void:
 
 
 func resetMaze() -> void:
+	for child in cellContainer.get_children():
+		cellContainer.remove_child(child)
+		child.queue_free()
+
 	cellGrid = []
 
 	goalX = randi() % CellsX
