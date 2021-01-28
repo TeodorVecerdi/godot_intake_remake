@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/HexGrid.tscn" type="PackedScene" id=1]
+
+[node name="Root" type="Node2D"]
+
+[node name="HexGrid" parent="." instance=ExtResource( 1 )]
+CellsX = 8
+CellsY = 8
