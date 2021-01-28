@@ -11,6 +11,8 @@ export (int) var CellsY: int = 4
 export var Scale: float = 1.0
 export (Vector2) var Offset: Vector2 = Vector2(90, 101)
 
+signal levelCompleted()
+
 onready var normalCells: HexCellTexture = $Tiles/CellTiles
 onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
@@ -39,6 +41,8 @@ func _onPlayerMoved(gridX: int, gridY: int):
 	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
 		print("Player reached goal!")
+		emit_signal("levelCompleted")
+		showAll()
 		timer.stop()
 
 
@@ -191,6 +195,12 @@ func getUnvisitedNeighbours(current: CellNeighbour, visited: Array) -> Array:
 
 func showCell(x: int, y: int) -> void:
 	cellGrid[y][x].setHidden(false)
+	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
+	for i in range(6):
+		if rangeCheck(i, x, y):
+			var neighbour = cellGrid[y + neighbourDeltas[i][1]][x + neighbourDeltas[i][0]]
+			if neighbour.isHidden:
+				neighbour.showWall((i+3)%6)
 
 
 func showNeighbours(x: int, y: int) -> void:
