@@ -75,7 +75,7 @@ func move(direction: int):
 
 
 func updateValidMoves():
-	validMoves = Grid.getPassableNeighbours(gridX, gridY)
+	validMoves = Grid.getPassableNeighboursBool(gridX, gridY)
 
 
 func updateArrows() -> void:

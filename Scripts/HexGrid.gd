@@ -52,7 +52,7 @@ func _unhandled_input(event) -> void:
 		)
 
 
-func getPassableNeighbours(x: int, y: int) -> Array:
+func getPassableNeighboursBool(x: int, y: int) -> Array:
 	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var upper_right = (
 		false
@@ -87,6 +87,7 @@ func isPassable(fromX: int, fromY: int, toX: int, toY: int) -> bool:
 func showNeighbours(x: int, y: int) -> void:
 	var neighbourDeltas = HexConstants.NeighbourDelta[y%2]
 	var passableNeighbours = getPassableNeighbours(x, y)
+	var passableNeighbours = getPassableNeighboursBool(x, y)
 	for i in range(6):
 		if passableNeighbours[i]:
 			cellGrid[y+neighbourDeltas[i][1]][x+neighbourDeltas[i][0]].setHidden(false)
