@@ -36,8 +36,9 @@ func _input(event):
 
 	if Input.is_key_pressed(KEY_SPACE):
 		currentZoomState = ! currentZoomState
-		setZoom(currentZoomState)
 		emit_signal("zoomChanged", currentZoomState)
+		setZoom(currentZoomState)
+		
 
 
 func setZoom(zoomState):
@@ -63,3 +64,9 @@ func setZoom(zoomState):
 
 		zoom = normalZoom
 		shouldFollowPlayer = true
+
+
+func _onHexGridLevelCompleted():
+	currentZoomState = true
+	setZoom(true)
+	emit_signal("zoomChanged", true)
