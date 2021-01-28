@@ -9,12 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "CameraFollow",
+"language": "GDScript",
+"path": "res://Scripts/CameraFollow.gd"
+}, {
 "base": "Node2D",
 "class": "CellIndex",
 "language": "GDScript",
 "path": "res://Scripts/CellIndex.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "CellNeighbour",
 "language": "GDScript",
 "path": "res://Scripts/CellNeighbour.gd"
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Player.gd"
 } ]
 _global_script_class_icons={
+"CameraFollow": "",
 "CellIndex": "",
 "CellNeighbour": "",
 "HexCell": "",
