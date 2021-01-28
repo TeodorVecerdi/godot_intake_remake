@@ -1,7 +1,6 @@
 extends Sprite
 class_name PlayerController
 
-const HexConstants = preload("res://Scripts/HexConstants.gd")
 onready var Grid: HexGrid = $".".get_parent() as HexGrid
 onready var Arrows = [
 	$Arrows/arrow_up_right,
