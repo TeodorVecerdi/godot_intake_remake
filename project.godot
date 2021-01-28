@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/HexGrid.gd"
 }, {
+"base": "Control",
+"class": "LevelTimer",
+"language": "GDScript",
+"path": "res://Scripts/LevelTimer.gd"
+}, {
 "base": "Sprite",
 "class": "PlayerController",
 "language": "GDScript",
@@ -51,13 +56,14 @@ _global_script_class_icons={
 "HexCellTexture": "",
 "HexConstants": "",
 "HexGrid": "",
+"LevelTimer": "",
 "PlayerController": ""
 }
 
 [application]
 
 config/name="Intake Remake"
-run/main_scene="res://Scenes/HexGrid.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [rendering]
