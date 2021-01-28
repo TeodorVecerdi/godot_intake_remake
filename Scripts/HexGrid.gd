@@ -185,13 +185,23 @@ func getUnvisitedNeighbours(current: CellNeighbour, visited: Array) -> Array:
 	return unvisited
 
 
-func showNeighbours(x: int, y: int) -> void:
+func showCell(x: int, y: int) -> void:
 	cellGrid[y][x].setHidden(false)
+
+
+func showNeighbours(x: int, y: int) -> void:
+	showCell(x, y)
 	var neighbourDeltas = HexConstants.NeighbourDelta[y % 2]
 	var passableNeighbours = getPassableNeighboursBool(x, y)
 	for i in range(6):
 		if passableNeighbours[i]:
-			cellGrid[y + neighbourDeltas[i][1]][x + neighbourDeltas[i][0]].setHidden(false)
+			showCell(x + neighbourDeltas[i][0], y + neighbourDeltas[i][1])
+
+
+func showAll() -> void:
+	for x in range(CellsX):
+		for y in range(CellsY):
+			showCell(x, y)
 
 
 func setWall(index: int, state: bool, x: int, y: int):
