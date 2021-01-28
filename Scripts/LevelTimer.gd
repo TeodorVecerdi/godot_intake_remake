@@ -1,6 +1,12 @@
 extends Control
 class_name LevelTimer
 
+export (Color) var GoodColor: Color
+export (Color) var WarningColor: Color
+export (Color) var BadColor: Color
+export var WarningBracket: float = 0.5
+export var BadBracket: float = 0.2
+
 onready var TimerProgress = $Timer/TimerProgress
 onready var TimerText = $Timer/TimerText
 
