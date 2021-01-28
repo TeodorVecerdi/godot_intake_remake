@@ -55,7 +55,6 @@ zoom = Vector2( 1.5, 1.5 )
 limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 3.7
-editor_draw_limits = true
 script = ExtResource( 13 )
 followSpeed = 4.0
 limitPadding = Vector2( 250, 200 )
