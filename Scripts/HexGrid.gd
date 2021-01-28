@@ -24,59 +24,9 @@ var goalY: int
 
 
 func _ready() -> void:
-	cellGrid = []
-
-	goalX = randi() % CellsX
-	goalY = randi() % CellsY
-
-	# First pass - generate cells
-	for y in range(CellsY):
-		cellGrid.append([])
-		for x in range(CellsX):
-			cellGrid[y].append(HexCell.instance())
-			var texVariation = randi() % 3
-
-			var index = CellIndex.new()
-			index.init(x, y)
-			if x == goalX and y == goalY:
-				cellGrid[y][x].loadTextures(hiddenCells, finishCells)
-			else:
-				cellGrid[y][x].loadTextures(hiddenCells, normalCells)
-			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation, index)
-			cellGrid[y][x].scale = Vector2(Scale, Scale)
-			cellContainer.add_child(cellGrid[y][x])
-			cellContainer.position = Offset * Scale
-
-	# Second pass - generate walls
-	for y in range(CellsY):
-		for x in range(CellsX):
-			for dir in range(6):
-				var wall = randi() % 3 == 0
-				setWall(dir, wall, x, y)
-
-	# Third pass - hide adjacent walls
-	for y in range(CellsY):
-		for x in range(CellsX):
-			var neighbours := getNeighboursIndices(x, y)
-			var current = cellGrid[y][x]
-			for neighbourIndex in neighbours:
-				var neighbour = cellGrid[neighbourIndex.cellIndex.y][neighbourIndex.cellIndex.x]
-				if (
-					current.walls[neighbourIndex.direction]
-					and not (
-						neighbour.hiddenWalls[(neighbourIndex.direction + 3) % 6]
-						or current.hiddenWalls[neighbourIndex.direction]
-					)
-				):
-					neighbour.hiddenWalls[(neighbourIndex.direction + 3) % 6] = true
-
-	# Final pass - set textures
-	for y in range(CellsY):
-		for x in range(CellsX):
-			cellGrid[y][x].setTexture()
+	generateMaze()
 
 	player.load()
-
 	showNeighbours(0, 0)
 	showNeighbours(goalX, goalY)
 
@@ -109,8 +59,91 @@ func _onTimerStopped():
 
 
 func _onTimerReady():
-	timer.start(15.0)
-	
+	timer.start(60.0)
+
+
+func generateMaze() -> void:
+	resetMaze()
+	generateMazeWalls()
+	#hideAdjacentWalls()
+
+	for y in range(CellsY):
+		for x in range(CellsX):
+			cellGrid[y][x].setTexture()
+
+
+func resetMaze() -> void:
+	cellGrid = []
+
+	goalX = randi() % CellsX
+	goalY = randi() % CellsY
+
+	# First pass - generate cells
+	for y in range(CellsY):
+		cellGrid.append([])
+		for x in range(CellsX):
+			cellGrid[y].append(HexCell.instance())
+
+			var texVariation = randi() % 3
+			var index = CellIndex.new()
+			index.init(x, y)
+			if x == goalX and y == goalY:
+				cellGrid[y][x].loadTextures(hiddenCells, finishCells)
+			else:
+				cellGrid[y][x].loadTextures(hiddenCells, normalCells)
+			cellGrid[y][x].initialize(HexConstants.ArrayToWorld(x, y, Scale), texVariation, index)
+			cellGrid[y][x].scale = Vector2(Scale, Scale)
+			cellContainer.add_child(cellGrid[y][x])
+			cellContainer.position = Offset * Scale
+
+
+func generateMazeWalls() -> void:
+	print("START VISITED")
+	var visited = []
+	for y in range(CellsY):
+		visited.append([])
+		for _x in range(CellsX):
+			visited[y].append(false)
+
+	var cellStack = []
+	var cellsLeft = CellsX * CellsY - 1
+	var current = CellNeighbour.new()
+	current.initXY(0, 0, 0)
+	visited[0][0] = true
+	while cellsLeft > 0:
+		var neighbours = getUnvisitedNeighbours(current, visited)
+		var neighbourLength = len(neighbours)
+		if neighbourLength != 0:
+			var chosen = neighbours[randi() % neighbourLength]
+			cellStack.push_back(current)
+			setWall(chosen.direction, false, current.x, current.y)
+			current = chosen
+			visited[current.y][current.x] = true
+			cellsLeft -= 1
+		elif len(cellStack) != 0:
+			current = cellStack.pop_back()
+		else:
+			print("EXITED MAZE GENERATION EARLY")
+			break
+
+
+func hideAdjacentWalls() -> void:
+	# Third pass - hide adjacent walls
+	for y in range(CellsY):
+		for x in range(CellsX):
+			var neighbours := getNeighboursIndices(x, y)
+			var current = cellGrid[y][x]
+			for neighbourIndex in neighbours:
+				var neighbour = cellGrid[neighbourIndex.y][neighbourIndex.x]
+				if (
+					current.walls[neighbourIndex.direction]
+					and not (
+						neighbour.hiddenWalls[(neighbourIndex.direction + 3) % 6]
+						or current.hiddenWalls[neighbourIndex.direction]
+					)
+				):
+					neighbour.hiddenWalls[(neighbourIndex.direction + 3) % 6] = true
+
 
 func getPassableNeighboursBool(x: int, y: int) -> Array:
 	var upper_right = false if y == 0 or (x == CellsX - 1 and y % 2 == 1) else isPassable(x, y, 0)
@@ -134,13 +167,22 @@ func getNeighboursIndices(x: int, y: int) -> Array:
 		if not rangeCheck(index, x, y):
 			continue
 		var neighbour = CellNeighbour.new()
-		neighbour.init(cellGrid[y + deltas[index][1]][x + deltas[index][0]].cellIndex, index)
+		neighbour.initCIdx(cellGrid[y + deltas[index][1]][x + deltas[index][0]].cellIndex, index)
 		indices.append(neighbour)
 	return indices
 
 
 func isPassable(x: int, y: int, direction: int) -> bool:
 	return not cellGrid[y][x].walls[direction]
+
+
+func getUnvisitedNeighbours(current: CellNeighbour, visited: Array) -> Array:
+	var unvisited = []
+	var allNeighbours = getNeighboursIndices(current.x, current.y)
+	for neighbour in allNeighbours:
+		if visited[neighbour.y][neighbour.x] == false:
+			unvisited.append(neighbour)
+	return unvisited
 
 
 func showNeighbours(x: int, y: int) -> void:
