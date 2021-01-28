@@ -11,7 +11,7 @@ export (int) var CellsY: int = 4
 export var Scale: float = 1.0
 export (Vector2) var Offset: Vector2 = Vector2(90, 101)
 
-signal levelCompleted()
+signal levelCompleted
 
 onready var normalCells: HexCellTexture = $Tiles/CellTiles
 onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
@@ -27,7 +27,6 @@ var goalY: int
 
 func _ready() -> void:
 	generateMaze()
-
 	player.load()
 
 
@@ -85,7 +84,10 @@ func resetMaze() -> void:
 	cellGrid = []
 
 	goalX = randi() % CellsX
-	goalY = randi() % CellsY
+	if goalX < int(float(CellsX) / 2):
+		goalY = randi() % int(float(CellsY) / 2) + int(float(CellsY) / 2)
+	else:
+		goalY = randi() % CellsY
 
 	# First pass - generate cells
 	for y in range(CellsY):
@@ -200,7 +202,7 @@ func showCell(x: int, y: int) -> void:
 		if rangeCheck(i, x, y):
 			var neighbour = cellGrid[y + neighbourDeltas[i][1]][x + neighbourDeltas[i][0]]
 			if neighbour.isHidden:
-				neighbour.showWall((i+3)%6)
+				neighbour.showWall((i + 3) % 6)
 
 
 func showNeighbours(x: int, y: int) -> void:
