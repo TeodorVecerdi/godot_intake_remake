@@ -11,6 +11,8 @@ onready var Arrows = [
 	$Arrows/arrow_up_left
 ]
 
+signal moved(gridX, gridY)
+
 var gridX: int
 var gridY: int
 var validMoves
@@ -56,7 +58,7 @@ func move(direction: int):
 	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
-	print("Moved to [%s, %s]" % [gridX, gridY])
+	emit_signal("moved", gridX, gridY)
 	updateValidMoves()
 	updateArrows()
 	Grid.showNeighbours(gridX, gridY)

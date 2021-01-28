@@ -59,3 +59,4 @@ editor_draw_limits = true
 script = ExtResource( 13 )
 followSpeed = 4.0
 limitPadding = Vector2( 250, 200 )
+[connection signal="moved" from="Player" to="." method="_onPlayerMoved"]

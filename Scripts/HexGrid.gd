@@ -127,6 +127,10 @@ func setWall(index: int, state: bool, x: int, y: int):
 	cellGrid[otherY][otherX].setWall((index + 3) % 6, state)
 
 
+func _onPlayerMoved(gridX: int, gridY: int):
+	print("Player moved to [%s, %s]" % [gridX, gridY])
+
+
 func rangeCheck(index: int, x: int, y: int) -> bool:
 	return not (
 		(index == 0 && y == 0 or (x == CellsX - 1 and y % 2 == 1))
