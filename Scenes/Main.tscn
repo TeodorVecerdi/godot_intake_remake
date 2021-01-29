@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/HexGrid.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/Root.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=4]
 
 [node name="Root" type="Control"]
 anchor_right = 1.0
@@ -18,11 +19,13 @@ CellsY = 8
 
 [node name="UI Canvas" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="UI Canvas" instance=ExtResource( 2 )]
+[node name="HUD" parent="UI Canvas" instance=ExtResource( 2 )]
 size_flags_horizontal = 2
 size_flags_vertical = 2
-[connection signal="levelStarted" from="Game" to="UI Canvas/UI" method="_onHexGridLevelStarted"]
-[connection signal="newLevel" from="Game" to="UI Canvas/UI" method="_onHexGridNewLevel"]
-[connection signal="completed" from="UI Canvas/UI" to="Game" method="_onTimerCompleted"]
-[connection signal="ready" from="UI Canvas/UI" to="Game" method="_onTimerReady"]
-[connection signal="stopped" from="UI Canvas/UI" to="Game" method="_onTimerStopped"]
+
+[node name="UI" parent="UI Canvas" instance=ExtResource( 4 )]
+[connection signal="levelStarted" from="Game" to="UI Canvas/HUD" method="_onHexGridLevelStarted"]
+[connection signal="newLevel" from="Game" to="UI Canvas/HUD" method="_onHexGridNewLevel"]
+[connection signal="completed" from="UI Canvas/HUD" to="Game" method="_onTimerCompleted"]
+[connection signal="ready" from="UI Canvas/HUD" to="Game" method="_onTimerReady"]
+[connection signal="stopped" from="UI Canvas/HUD" to="Game" method="_onTimerStopped"]
