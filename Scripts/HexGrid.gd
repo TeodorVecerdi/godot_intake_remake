@@ -28,11 +28,11 @@ var goalY: int
 var score: int = 0
 var waitingForInput: bool = false
 var waitingForPlayerStart: bool = false
+var isGameOver: bool = false
 
 
 func _ready() -> void:
 	emit_signal("levelCompleted")
-	
 
 
 func _input(event) -> void:
@@ -45,10 +45,13 @@ func _input(event) -> void:
 			get_tree().quit()
 		elif event.scancode == KEY_F and waitingForInput:
 			startLevel()
+		elif event.scancode == KEY_R and isGameOver:
+			restart()
+		elif event.scancode == KEY_T and isGameOver:
+			returnToMainMenu()
 
 
 func _onPlayerMoved(gridX: int, gridY: int) -> void:
-	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
 		win()
 
@@ -68,7 +71,7 @@ func _onCameraZoomChanged(state) -> void:
 
 func _onTimerCompleted() -> void:
 	print("Time ran out")
-	player.lockMovement(true)
+	gameOver()
 
 
 func _onTimerStopped() -> void:
@@ -77,6 +80,26 @@ func _onTimerStopped() -> void:
 
 func _onTimerReady() -> void:
 	startLevel()
+
+
+func gameOver() -> void:
+	showAll()
+	timer.stop()
+	emit_signal("levelCompleted")
+	isGameOver = true
+
+func restart() -> void:
+	score = 0
+	isGameOver = false
+	startLevel()
+
+
+
+func returnToMainMenu() -> void:
+	score = 0
+	isGameOver = false
+	get_tree().quit()
+
 
 
 func win() -> void:
