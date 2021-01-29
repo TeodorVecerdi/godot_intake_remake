@@ -20,7 +20,8 @@ onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
 onready var cellContainer = $Cells
 onready var player: PlayerController = $Player
-onready var timer = $"../UI Canvas/UI"
+onready var timer = $"../UI Canvas/HUD"
+onready var winLose = $"../UI Canvas/UI"
 
 var cellGrid
 var goalX: int
@@ -41,14 +42,22 @@ func _input(event) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE:
+		if event.scancode == KEY_ESCAPE and (not isGameOver or not waitingForInput):
 			get_tree().quit()
-		elif event.scancode == KEY_F and waitingForInput:
-			startLevel()
-		elif event.scancode == KEY_R and isGameOver:
-			restart()
-		elif event.scancode == KEY_T and isGameOver:
-			returnToMainMenu()
+		elif not isGameOver:
+			if event.scancode == KEY_F and waitingForInput:
+				winLose.hideActive()
+				yield(winLose, "onFadeOut")
+				startLevel()
+			elif event.scancode == KEY_ESCAPE and waitingForInput:
+				returnToMainMenu()
+		elif isGameOver:
+			if event.scancode == KEY_R and waitingForInput:
+				winLose.hideActive()
+				yield(winLose, "onFadeOut")
+				restart()
+			elif event.scancode == KEY_ESCAPE and waitingForInput:
+				returnToMainMenu()
 
 
 func _onPlayerMoved(gridX: int, gridY: int) -> void:
@@ -87,6 +96,9 @@ func gameOver() -> void:
 	timer.stop()
 	emit_signal("levelCompleted")
 	isGameOver = true
+	winLose.showLose(score)
+	yield(winLose, "onFadeIn")
+	waitingForInput = true
 
 func restart() -> void:
 	score = 0
@@ -94,8 +106,8 @@ func restart() -> void:
 	startLevel()
 
 
-
 func returnToMainMenu() -> void:
+	print("TODO: RETURN TO MAIN MENU")
 	score = 0
 	isGameOver = false
 	get_tree().quit()
@@ -108,11 +120,14 @@ func win() -> void:
 		scoreIncrease = 4
 	elif timer.fillAmount > timer.BadBracket:
 		scoreIncrease = 2
+	var oldScore: int = score
 	score += scoreIncrease
 	print("Score: [%d] (increased by [%d])" % [score, scoreIncrease])
 	showAll()
 	timer.stop()
 	emit_signal("levelCompleted")
+	winLose.showWin(oldScore, score)
+	yield(winLose, "onFadeIn")
 	waitingForInput = true
 
 
