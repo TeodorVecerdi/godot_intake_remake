@@ -14,6 +14,7 @@ var currentZoomState = false
 var shouldFollowPlayer = true
 var locked = false
 
+var center: Vector2
 var gridWidth: float
 var gridHeight: float
 
@@ -21,6 +22,7 @@ var gridHeight: float
 func _ready() -> void:
 	gridWidth = 2.0 * grid.CellsX * HexConstants.RADIUS * HexConstants.INNER_CONSTANT * grid.Scale
 	gridHeight = 1.5 * grid.CellsY * HexConstants.RADIUS * grid.Scale
+	center = Vector2(gridWidth / 2.0, gridHeight / 2.0 - HexConstants.RADIUS * 1.2)
 
 	setZoom(false)
 
@@ -54,7 +56,6 @@ func setZoom(zoomState) -> void:
 		limit_left = -1000000000
 		limit_right = 1000000000
 
-		var center = Vector2(gridWidth / 2.0, gridHeight / 2.0 - HexConstants.RADIUS * 1.2)
 		position = center
 
 		var viewportSize = get_viewport().size
