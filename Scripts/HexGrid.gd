@@ -12,6 +12,8 @@ export var Scale: float = 1.0
 export (Vector2) var Offset: Vector2 = Vector2(90, 101)
 
 signal levelCompleted
+signal newLevel
+signal levelStarted
 
 onready var normalCells: HexCellTexture = $Tiles/CellTiles
 onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
@@ -23,44 +25,82 @@ onready var timer = $"../UI Canvas/UI"
 var cellGrid
 var goalX: int
 var goalY: int
+var score: int = 0
+var waitingForInput: bool = false
+var waitingForPlayerStart: bool = false
 
 
 func _ready() -> void:
-	generateMaze()
-	player.load()
+	emit_signal("levelCompleted")
+	
 
 
-func _unhandled_input(event) -> void:
+func _input(event) -> void:
+	var isPressed = event.is_pressed() and not event.is_echo()
+	if not isPressed:
+		return
+
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
+		if event.scancode == KEY_ESCAPE:
 			get_tree().quit()
+		elif event.scancode == KEY_F and waitingForInput:
+			startLevel()
 
 
-func _onPlayerMoved(gridX: int, gridY: int):
+func _onPlayerMoved(gridX: int, gridY: int) -> void:
 	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
-		print("Player reached goal!")
-		emit_signal("levelCompleted")
-		showAll()
-		timer.stop()
+		win()
 
 
-func _onCameraZoomChanged(state):
+func _onCameraZoomChanged(state) -> void:
+	if waitingForPlayerStart:
+		waitingForPlayerStart = false
+
+		player.load()
+		emit_signal("levelStarted")
+
+		timer.start()
+
 	player.lockMovement(state)
 	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
 
 
-func _onTimerCompleted():
+func _onTimerCompleted() -> void:
 	print("Time ran out")
 	player.lockMovement(true)
 
 
-func _onTimerStopped():
+func _onTimerStopped() -> void:
 	pass
 
 
-func _onTimerReady():
-	timer.start(60.0)
+func _onTimerReady() -> void:
+	startLevel()
+
+
+func win() -> void:
+	var scoreIncrease: int = 1
+	if timer.fillAmount > timer.WarningBracket:
+		scoreIncrease = 4
+	elif timer.fillAmount > timer.BadBracket:
+		scoreIncrease = 2
+	score += scoreIncrease
+	print("Score: [%d] (increased by [%d])" % [score, scoreIncrease])
+	showAll()
+	timer.stop()
+	emit_signal("levelCompleted")
+	waitingForInput = true
+
+
+
+func startLevel() -> void:
+	generateMaze()
+	player.reset()
+	waitingForInput = false
+	waitingForPlayerStart = true
+	emit_signal("newLevel")
+	timer.reset(60.0)
 
 
 func generateMaze() -> void:
@@ -220,7 +260,7 @@ func showAll() -> void:
 			showCell(x, y)
 
 
-func setWall(index: int, state: bool, x: int, y: int):
+func setWall(index: int, state: bool, x: int, y: int) -> void:
 	if not rangeCheck(index, x, y):
 		return
 

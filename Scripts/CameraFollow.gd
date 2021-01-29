@@ -12,12 +12,13 @@ onready var grid: HexGrid = $".".get_parent() as HexGrid
 
 var currentZoomState = false
 var shouldFollowPlayer = true
+var locked = false
 
 var gridWidth: float
 var gridHeight: float
 
 
-func _ready():
+func _ready() -> void:
 	gridWidth = 2.0 * grid.CellsX * HexConstants.RADIUS * HexConstants.INNER_CONSTANT * grid.Scale
 	gridHeight = 1.5 * grid.CellsY * HexConstants.RADIUS * grid.Scale
 
@@ -29,7 +30,10 @@ func _process(_delta) -> void:
 		position = target.position
 
 
-func _input(event):
+func _input(event) -> void:
+	if locked:
+		return
+
 	var justPressed = event.is_pressed() and not event.is_echo()
 	if not justPressed:
 		return
@@ -41,7 +45,7 @@ func _input(event):
 		
 
 
-func setZoom(zoomState):
+func setZoom(zoomState) -> void:
 	if zoomState:
 		shouldFollowPlayer = false
 
@@ -50,11 +54,11 @@ func setZoom(zoomState):
 		limit_left = -1000000000
 		limit_right = 1000000000
 
-		var center = Vector2(gridWidth / 2.0, gridHeight / 2.0 - HexConstants.RADIUS * 0.25)
+		var center = Vector2(gridWidth / 2.0, gridHeight / 2.0 - HexConstants.RADIUS * 1.2)
 		position = center
 
 		var viewportSize = get_viewport().size
-		var zoomLevel: float = gridHeight / viewportSize.y + 0.2
+		var zoomLevel: float = gridHeight / viewportSize.y + 0.47
 		zoom = Vector2(zoomLevel, zoomLevel)
 	else:
 		limit_bottom = int(gridHeight + limitPadding.y)
@@ -66,7 +70,13 @@ func setZoom(zoomState):
 		shouldFollowPlayer = true
 
 
-func _onHexGridLevelCompleted():
+func _onHexGridLevelCompleted() -> void:
 	currentZoomState = true
 	setZoom(true)
 	emit_signal("zoomChanged", true)
+	locked = true
+
+
+func _onHexGridNewLevel() -> void:
+	locked = false
+	

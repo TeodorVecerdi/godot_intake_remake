@@ -56,12 +56,12 @@ func loadTextures(_hiddenTextures: HexCellTexture, _shownTextures: HexCellTextur
 	shownTextures = _shownTextures
 
 
-func setHidden(hidden: bool):
+func setHidden(hidden: bool) -> void:
 	isHidden = hidden
 	setTexture()
 
 
-func setWall(index: int, state: bool):
+func setWall(index: int, state: bool) -> void:
 	walls[index] = state
 	if isHidden:
 		Walls[index].visible = false
