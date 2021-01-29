@@ -54,6 +54,8 @@ func _input(event) -> void:
 				returnToMainMenu()
 		elif isGameOver:
 			if event.scancode == KEY_R and waitingForInput:
+				winLose.animateScoreRestart(score)
+				yield(winLose, "onScoreRestartComplete")
 				winLose.hideActive()
 				yield(winLose, "onFadeOut")
 				restart()
