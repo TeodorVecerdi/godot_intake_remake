@@ -23,6 +23,8 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 32
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="UI" type="Control"]
@@ -169,6 +171,7 @@ __meta__ = {
 }
 KeyTexture = ExtResource( 8 )
 Action = "quit!"
+IsRight = true
 
 [node name="Press" type="Label" parent="Win/HintContainer/HintRight"]
 margin_left = 748.0
@@ -218,7 +221,6 @@ margin_right = 992.0
 margin_bottom = 54.0
 
 [node name="Lose" type="VBoxContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -354,6 +356,7 @@ __meta__ = {
 }
 KeyTexture = ExtResource( 8 )
 Action = "quit!"
+IsRight = true
 
 [node name="Press" type="Label" parent="Lose/HintContainer/HintRight"]
 margin_left = 748.0
