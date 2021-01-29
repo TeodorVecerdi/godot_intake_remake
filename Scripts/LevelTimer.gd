@@ -45,6 +45,16 @@ func _process(delta) -> void:
 	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
 
 
+func _onHexGridNewLevel() -> void:
+	print("NEW LEVEL")
+	modulate = Color(0, 0, 0, 0)
+
+
+func _onHexGridLevelStarted() -> void:
+	print("LEVEL STARTED")
+	modulate = Color(1, 1, 1, 1)
+
+
 func start(_totalTime: float, _timeLeft: float = -1.0):
 	TimerProgress.tint_progress = GoodColor
 	totalTime = _totalTime

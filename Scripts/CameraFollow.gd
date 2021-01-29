@@ -12,6 +12,7 @@ onready var grid: HexGrid = $".".get_parent() as HexGrid
 
 var currentZoomState = false
 var shouldFollowPlayer = true
+var locked = false
 
 var gridWidth: float
 var gridHeight: float
@@ -30,6 +31,9 @@ func _process(_delta) -> void:
 
 
 func _input(event):
+	if locked:
+		return
+
 	var justPressed = event.is_pressed() and not event.is_echo()
 	if not justPressed:
 		return
@@ -70,3 +74,9 @@ func _onHexGridLevelCompleted():
 	currentZoomState = true
 	setZoom(true)
 	emit_signal("zoomChanged", true)
+	locked = true
+
+
+func _onHexGridNewLevel():
+	locked = false
+	
