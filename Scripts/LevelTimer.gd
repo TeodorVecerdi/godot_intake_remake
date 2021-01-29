@@ -55,14 +55,32 @@ func _onHexGridLevelStarted() -> void:
 	modulate = Color(1, 1, 1, 1)
 
 
-func start(_totalTime: float, _timeLeft: float = -1.0):
-	TimerProgress.tint_progress = GoodColor
-	totalTime = _totalTime
-	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
-	enabled = true
+func start():
 	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
+	enabled = true
+
+
+func restart(_timeLeft: float = -1.0):
+	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
+	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
+	enabled = true
 
 
 func stop():
 	enabled = false
 	emit_signal("stopped")
+
+
+func reset(_totalTime: float, _timeLeft: float = -1.0):
+	totalTime = _totalTime
+	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
+	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]

@@ -59,11 +59,11 @@ func _onPlayerMoved(gridX: int, gridY: int):
 func _onCameraZoomChanged(state):
 	if waitingForPlayerStart:
 		waitingForPlayerStart = false
-		
+
 		player.load()
 		emit_signal("levelStarted")
 
-		timer.start(60.0)
+		timer.start()
 
 	player.lockMovement(state)
 	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
@@ -88,6 +88,7 @@ func startLevel() -> void:
 	waitingForInput = false
 	waitingForPlayerStart = true
 	emit_signal("newLevel")
+	timer.reset(60.0)
 
 
 func generateMaze() -> void:
