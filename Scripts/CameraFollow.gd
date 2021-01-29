@@ -18,7 +18,7 @@ var gridWidth: float
 var gridHeight: float
 
 
-func _ready():
+func _ready() -> void:
 	gridWidth = 2.0 * grid.CellsX * HexConstants.RADIUS * HexConstants.INNER_CONSTANT * grid.Scale
 	gridHeight = 1.5 * grid.CellsY * HexConstants.RADIUS * grid.Scale
 
@@ -30,7 +30,7 @@ func _process(_delta) -> void:
 		position = target.position
 
 
-func _input(event):
+func _input(event) -> void:
 	if locked:
 		return
 
@@ -45,7 +45,7 @@ func _input(event):
 		
 
 
-func setZoom(zoomState):
+func setZoom(zoomState) -> void:
 	if zoomState:
 		shouldFollowPlayer = false
 
@@ -70,13 +70,13 @@ func setZoom(zoomState):
 		shouldFollowPlayer = true
 
 
-func _onHexGridLevelCompleted():
+func _onHexGridLevelCompleted() -> void:
 	currentZoomState = true
 	setZoom(true)
 	emit_signal("zoomChanged", true)
 	locked = true
 
 
-func _onHexGridNewLevel():
+func _onHexGridNewLevel() -> void:
 	locked = false
 	

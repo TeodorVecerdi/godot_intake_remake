@@ -47,16 +47,13 @@ func _input(event) -> void:
 			startLevel()
 
 
-func _onPlayerMoved(gridX: int, gridY: int):
+func _onPlayerMoved(gridX: int, gridY: int) -> void:
 	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
 		win()
-		showAll()
-		timer.stop()
-		waitingForInput = true
 
 
-func _onCameraZoomChanged(state):
+func _onCameraZoomChanged(state) -> void:
 	if waitingForPlayerStart:
 		waitingForPlayerStart = false
 
@@ -69,16 +66,16 @@ func _onCameraZoomChanged(state):
 	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
 
 
-func _onTimerCompleted():
+func _onTimerCompleted() -> void:
 	print("Time ran out")
 	player.lockMovement(true)
 
 
-func _onTimerStopped():
+func _onTimerStopped() -> void:
 	pass
 
 
-func _onTimerReady():
+func _onTimerReady() -> void:
 	startLevel()
 
 
@@ -263,7 +260,7 @@ func showAll() -> void:
 			showCell(x, y)
 
 
-func setWall(index: int, state: bool, x: int, y: int):
+func setWall(index: int, state: bool, x: int, y: int) -> void:
 	if not rangeCheck(index, x, y):
 		return
 

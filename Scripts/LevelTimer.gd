@@ -46,7 +46,6 @@ func _process(delta) -> void:
 
 
 func _onHexGridNewLevel() -> void:
-	print("NEW LEVEL")
 	modulate = Color(.5, .5, .5, 1)
 
 
@@ -54,7 +53,7 @@ func _onHexGridLevelStarted() -> void:
 	modulate = Color(1, 1, 1, 1)
 
 
-func start():
+func start() -> void:
 	fillAmount = 1.0
 	TimerProgress.tint_progress = GoodColor
 	TimerProgress.ratio = fillAmount
@@ -62,7 +61,7 @@ func start():
 	enabled = true
 
 
-func restart(_timeLeft: float = -1.0):
+func restart(_timeLeft: float = -1.0) -> void:
 	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
 	fillAmount = 1.0
 	TimerProgress.tint_progress = GoodColor
@@ -71,12 +70,12 @@ func restart(_timeLeft: float = -1.0):
 	enabled = true
 
 
-func stop():
+func stop() -> void:
 	enabled = false
 	emit_signal("stopped")
 
 
-func reset(_totalTime: float, _timeLeft: float = -1.0):
+func reset(_totalTime: float, _timeLeft: float = -1.0) -> void:
 	totalTime = _totalTime
 	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
 	fillAmount = 1.0
