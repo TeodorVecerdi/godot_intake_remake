@@ -41,13 +41,15 @@ func _input(event) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE:
+		if event.scancode == KEY_ESCAPE and (not isGameOver or not waitingForInput):
 			get_tree().quit()
 		elif event.scancode == KEY_F and waitingForInput:
 			startLevel()
+		elif event.scancode == KEY_ESCAPE and waitingForInput:
+			returnToMainMenu()
 		elif event.scancode == KEY_R and isGameOver:
 			restart()
-		elif event.scancode == KEY_T and isGameOver:
+		elif event.scancode == KEY_ESCAPE and isGameOver:
 			returnToMainMenu()
 
 
