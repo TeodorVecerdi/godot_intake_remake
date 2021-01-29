@@ -5,6 +5,7 @@ export (float) var ScoreAnimationDuration: float = 0.2
 
 signal onFadeIn
 signal onFadeOut
+signal onScoreRestartComplete
 
 onready var Win = $Win
 onready var WinScoreLabel = $Win/MarginContainer/TextContainer/Score
@@ -53,6 +54,24 @@ func showLose(score: int) -> void:
 	tween.start()
 	yield(tween, "tween_completed")
 	emit_signal("onFadeIn")
+
+
+func animateScoreRestart(score: int) -> void:
+	var currentLength = len(LoseScoreLabel.text)
+	tween.interpolate_property(LoseScoreLabel, "modulate", Color(1,1,1,1), Color(0.88, 0.22, 0.04, 1), 0.1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, AnimationDuration * 0.5)
+	tween.interpolate_property(LoseScoreLabel, "visible_characters", currentLength, 6, ScoreAnimationDuration * (currentLength - 6), Tween.TRANS_LINEAR, Tween.EASE_IN, AnimationDuration)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	LoseScoreLabel.text = "Score: 0"
+	tween.interpolate_property(LoseScoreLabel, "visible_characters", 6, 7, ScoreAnimationDuration, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	tween.interpolate_property(LoseScoreLabel, "modulate", Color(0.88, 0.22, 0.04, 1), Color(1,1,1,1),  0.1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, AnimationDuration * 0.5)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	tween.interpolate_callback(self, AnimationDuration, "emit_signal", "onScoreRestartComplete")
+	tween.start()
+	yield(tween, "tween_all_completed")
 
 
 func hideActive() -> void:
