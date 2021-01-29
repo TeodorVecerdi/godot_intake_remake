@@ -20,7 +20,7 @@ onready var hiddenCells: HexCellTexture = $Tiles/HiddenTiles
 onready var finishCells: HexCellTexture = $Tiles/FinishTiles
 onready var cellContainer = $Cells
 onready var player: PlayerController = $Player
-onready var timer = $"../UI Canvas/UI"
+onready var timer = $"../UI Canvas/HUD"
 
 var cellGrid
 var goalX: int
