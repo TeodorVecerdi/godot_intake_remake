@@ -24,6 +24,7 @@ size_flags_horizontal = 2
 size_flags_vertical = 2
 
 [node name="UI" parent="UI Canvas" instance=ExtResource( 4 )]
+AnimationDuration = 0.6
 [connection signal="levelStarted" from="Game" to="UI Canvas/HUD" method="_onHexGridLevelStarted"]
 [connection signal="newLevel" from="Game" to="UI Canvas/HUD" method="_onHexGridNewLevel"]
 [connection signal="completed" from="UI Canvas/HUD" to="Game" method="_onTimerCompleted"]
