@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Resources/KeySprites/A.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/Fonts/Roboto-Light.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://Resources/KeySprites/Numlock.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/KeyboardHint.gd" type="Script" id=5]
-[ext_resource path="res://Resources/KeySprites/Backspace.png" type="Texture" id=6]
+[ext_resource path="res://Resources/KeySprites/F.png" type="Texture" id=6]
+[ext_resource path="res://Resources/KeySprites/R.png" type="Texture" id=7]
+[ext_resource path="res://Resources/KeySprites/Escape.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -31,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="Win" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -40,14 +41,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox"]
+[node name="MarginContainer" type="MarginContainer" parent="Win"]
 margin_right = 1024.0
 margin_bottom = 526.0
 size_flags_vertical = 3
 custom_constants/margin_top = 192
 custom_constants/margin_bottom = 128
 
-[node name="WinContainer" type="VBoxContainer" parent="VBox/MarginContainer"]
+[node name="TextContainer" type="VBoxContainer" parent="Win/MarginContainer"]
 margin_top = 192.0
 margin_right = 1024.0
 margin_bottom = 398.0
@@ -60,7 +61,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="VBox/MarginContainer/WinContainer"]
+[node name="Title" type="Label" parent="Win/MarginContainer/TextContainer"]
 margin_top = 4.0
 margin_right = 1024.0
 margin_bottom = 61.0
@@ -73,7 +74,7 @@ text = "Level complete!"
 align = 1
 valign = 2
 
-[node name="Message" type="Label" parent="VBox/MarginContainer/WinContainer"]
+[node name="Message" type="Label" parent="Win/MarginContainer/TextContainer"]
 margin_top = 65.0
 margin_right = 1024.0
 margin_bottom = 141.0
@@ -81,7 +82,7 @@ custom_fonts/font = SubResource( 3 )
 text = "Well done!"
 align = 1
 
-[node name="Score" type="Label" parent="VBox/MarginContainer/WinContainer"]
+[node name="Score" type="Label" parent="Win/MarginContainer/TextContainer"]
 margin_top = 145.0
 margin_right = 1024.0
 margin_bottom = 202.0
@@ -92,7 +93,7 @@ valign = 1
 uppercase = true
 percent_visible = -0.125
 
-[node name="HintContainer" type="MarginContainer" parent="VBox"]
+[node name="HintContainer" type="MarginContainer" parent="Win"]
 margin_top = 530.0
 margin_right = 1024.0
 margin_bottom = 600.0
@@ -101,19 +102,20 @@ custom_constants/margin_right = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 16
 
-[node name="HintLeft" type="HBoxContainer" parent="VBox/HintContainer"]
+[node name="HintLeft" type="HBoxContainer" parent="Win/HintContainer"]
 margin_left = 32.0
 margin_right = 992.0
 margin_bottom = 54.0
+rect_pivot_offset = Vector2( 128, 27 )
 size_flags_vertical = 0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 KeyTexture = ExtResource( 6 )
-Action = "shit yourself"
+Action = "continue!"
 
-[node name="Press" type="Label" parent="VBox/HintContainer/HintLeft"]
+[node name="Press" type="Label" parent="Win/HintContainer/HintLeft"]
 margin_top = 8.0
 margin_right = 80.0
 margin_bottom = 46.0
@@ -122,7 +124,7 @@ text = "Press"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/HintContainer/HintLeft"]
+[node name="MarginContainer" type="MarginContainer" parent="Win/HintContainer/HintLeft"]
 margin_left = 84.0
 margin_right = 148.0
 margin_bottom = 54.0
@@ -134,7 +136,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 0
 
-[node name="Key" type="TextureRect" parent="VBox/HintContainer/HintLeft/MarginContainer"]
+[node name="Key" type="TextureRect" parent="Win/HintContainer/HintLeft/MarginContainer"]
 margin_left = 8.0
 margin_top = 6.0
 margin_right = 56.0
@@ -144,7 +146,7 @@ texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
-[node name="Action" type="Label" parent="VBox/HintContainer/HintLeft"]
+[node name="Action" type="Label" parent="Win/HintContainer/HintLeft"]
 margin_left = 152.0
 margin_top = 8.0
 margin_right = 212.0
@@ -154,20 +156,21 @@ text = "to ..."
 align = 1
 valign = 1
 
-[node name="HintRight" type="HBoxContainer" parent="VBox/HintContainer"]
+[node name="HintRight" type="HBoxContainer" parent="Win/HintContainer"]
 margin_left = 32.0
 margin_right = 992.0
 margin_bottom = 54.0
+rect_pivot_offset = Vector2( 832, 27 )
 size_flags_vertical = 0
 alignment = 2
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-KeyTexture = ExtResource( 4 )
-Action = "piss yourself"
+KeyTexture = ExtResource( 8 )
+Action = "quit!"
 
-[node name="Press" type="Label" parent="VBox/HintContainer/HintRight"]
+[node name="Press" type="Label" parent="Win/HintContainer/HintRight"]
 margin_left = 748.0
 margin_top = 8.0
 margin_right = 828.0
@@ -177,7 +180,7 @@ text = "Press"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBox/HintContainer/HintRight"]
+[node name="MarginContainer" type="MarginContainer" parent="Win/HintContainer/HintRight"]
 margin_left = 832.0
 margin_right = 896.0
 margin_bottom = 54.0
@@ -189,7 +192,7 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 0
 
-[node name="Key" type="TextureRect" parent="VBox/HintContainer/HintRight/MarginContainer"]
+[node name="Key" type="TextureRect" parent="Win/HintContainer/HintRight/MarginContainer"]
 margin_left = 8.0
 margin_top = 6.0
 margin_right = 56.0
@@ -199,7 +202,7 @@ texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
-[node name="Action" type="Label" parent="VBox/HintContainer/HintRight"]
+[node name="Action" type="Label" parent="Win/HintContainer/HintRight"]
 margin_left = 900.0
 margin_top = 8.0
 margin_right = 960.0
@@ -209,7 +212,192 @@ text = "to ..."
 align = 1
 valign = 1
 
-[node name="VSeparator" type="VSeparator" parent="VBox/HintContainer"]
+[node name="VSeparator" type="VSeparator" parent="Win/HintContainer"]
+margin_left = 32.0
+margin_right = 992.0
+margin_bottom = 54.0
+
+[node name="Lose" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Lose"]
+margin_right = 1024.0
+margin_bottom = 526.0
+size_flags_vertical = 3
+custom_constants/margin_top = 192
+custom_constants/margin_bottom = 128
+
+[node name="TextContainer" type="VBoxContainer" parent="Lose/MarginContainer"]
+margin_top = 192.0
+margin_right = 1024.0
+margin_bottom = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Lose/MarginContainer/TextContainer"]
+margin_top = 4.0
+margin_right = 1024.0
+margin_bottom = 61.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.2, 0.2, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Game Over!"
+align = 1
+valign = 2
+
+[node name="Message" type="Label" parent="Lose/MarginContainer/TextContainer"]
+margin_top = 65.0
+margin_right = 1024.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 3 )
+text = "Keep trying!"
+align = 1
+
+[node name="Score" type="Label" parent="Lose/MarginContainer/TextContainer"]
+margin_top = 145.0
+margin_right = 1024.0
+margin_bottom = 202.0
+custom_fonts/font = SubResource( 2 )
+text = "Score: 16"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HintContainer" type="MarginContainer" parent="Lose"]
+margin_top = 530.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 16
+
+[node name="HintLeft" type="HBoxContainer" parent="Lose/HintContainer"]
+margin_left = 32.0
+margin_right = 992.0
+margin_bottom = 54.0
+rect_pivot_offset = Vector2( 128, 27 )
+size_flags_vertical = 0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+KeyTexture = ExtResource( 7 )
+Action = "retry!"
+
+[node name="Press" type="Label" parent="Lose/HintContainer/HintLeft"]
+margin_top = 8.0
+margin_right = 80.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 4 )
+text = "Press"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Lose/HintContainer/HintLeft"]
+margin_left = 84.0
+margin_right = 148.0
+margin_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 32, 32 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 6
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 0
+
+[node name="Key" type="TextureRect" parent="Lose/HintContainer/HintLeft/MarginContainer"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 56.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 48, 48 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Action" type="Label" parent="Lose/HintContainer/HintLeft"]
+margin_left = 152.0
+margin_top = 8.0
+margin_right = 212.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 4 )
+text = "to ..."
+align = 1
+valign = 1
+
+[node name="HintRight" type="HBoxContainer" parent="Lose/HintContainer"]
+margin_left = 32.0
+margin_right = 992.0
+margin_bottom = 54.0
+rect_pivot_offset = Vector2( 832, 27 )
+size_flags_vertical = 0
+alignment = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+KeyTexture = ExtResource( 8 )
+Action = "quit!"
+
+[node name="Press" type="Label" parent="Lose/HintContainer/HintRight"]
+margin_left = 748.0
+margin_top = 8.0
+margin_right = 828.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 4 )
+text = "Press"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Lose/HintContainer/HintRight"]
+margin_left = 832.0
+margin_right = 896.0
+margin_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 32, 32 )
+custom_constants/margin_right = 8
+custom_constants/margin_top = 6
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 0
+
+[node name="Key" type="TextureRect" parent="Lose/HintContainer/HintRight/MarginContainer"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 56.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 48, 48 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="Action" type="Label" parent="Lose/HintContainer/HintRight"]
+margin_left = 900.0
+margin_top = 8.0
+margin_right = 960.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 4 )
+text = "to ..."
+align = 1
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="Lose/HintContainer"]
 margin_left = 32.0
 margin_right = 992.0
 margin_bottom = 54.0
