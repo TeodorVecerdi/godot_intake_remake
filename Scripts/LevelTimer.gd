@@ -45,14 +45,40 @@ func _process(delta) -> void:
 	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
 
 
-func start(_totalTime: float, _timeLeft: float = -1.0):
-	TimerProgress.tint_progress = GoodColor
-	totalTime = _totalTime
-	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
-	enabled = true
+func _onHexGridNewLevel() -> void:
+	modulate = Color(.5, .5, .5, 1)
+
+
+func _onHexGridLevelStarted() -> void:
+	modulate = Color(1, 1, 1, 1)
+
+
+func start() -> void:
 	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
+	enabled = true
 
 
-func stop():
+func restart(_timeLeft: float = -1.0) -> void:
+	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
+	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
+	enabled = true
+
+
+func stop() -> void:
 	enabled = false
 	emit_signal("stopped")
+
+
+func reset(_totalTime: float, _timeLeft: float = -1.0) -> void:
+	totalTime = _totalTime
+	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
+	fillAmount = 1.0
+	TimerProgress.tint_progress = GoodColor
+	TimerProgress.ratio = fillAmount
+	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
