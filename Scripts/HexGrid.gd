@@ -22,6 +22,7 @@ onready var cellContainer = $Cells
 onready var player: PlayerController = $Player
 onready var timer = $"../UI Canvas/HUD"
 onready var winLose = $"../UI Canvas/UI"
+onready var cameraController = $Camera
 
 var cellGrid
 var goalX: int
@@ -88,7 +89,7 @@ func _onTimerStopped() -> void:
 
 
 func _onTimerReady() -> void:
-	startLevel()
+	startLevel(true)
 
 
 func gameOver() -> void:
@@ -132,10 +133,16 @@ func win() -> void:
 
 
 
-func startLevel() -> void:
+func startLevel(skipTransition: bool = false) -> void:
+	waitingForInput = false
+	if not skipTransition:
+		cameraController.levelFadeOut()
+		yield(cameraController, "onLevelFadeOut")
 	generateMaze()
 	player.reset()
-	waitingForInput = false
+	if not skipTransition:
+		cameraController.levelFadeIn()
+		yield(cameraController, "onLevelFadeIn")
 	waitingForPlayerStart = true
 	emit_signal("newLevel")
 	timer.reset(60.0)
