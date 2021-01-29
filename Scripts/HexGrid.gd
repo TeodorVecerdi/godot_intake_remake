@@ -50,7 +50,7 @@ func _input(event) -> void:
 func _onPlayerMoved(gridX: int, gridY: int):
 	print("Player moved to [%s, %s]" % [gridX, gridY])
 	if gridX == goalX and gridY == goalY:
-		emit_signal("levelCompleted")
+		win()
 		showAll()
 		timer.stop()
 		waitingForInput = true
@@ -80,6 +80,21 @@ func _onTimerStopped():
 
 func _onTimerReady():
 	startLevel()
+
+
+func win() -> void:
+	var scoreIncrease: int = 1
+	if timer.fillAmount > timer.WarningBracket:
+		scoreIncrease = 4
+	elif timer.fillAmount > timer.BadBracket:
+		scoreIncrease = 2
+	score += scoreIncrease
+	print("Score: [%d] (increased by [%d])" % [score, scoreIncrease])
+	showAll()
+	timer.stop()
+	emit_signal("levelCompleted")
+	waitingForInput = true
+
 
 
 func startLevel() -> void:
