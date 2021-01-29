@@ -47,11 +47,10 @@ func _process(delta) -> void:
 
 func _onHexGridNewLevel() -> void:
 	print("NEW LEVEL")
-	modulate = Color(0, 0, 0, 0)
+	modulate = Color(.5, .5, .5, 1)
 
 
 func _onHexGridLevelStarted() -> void:
-	print("LEVEL STARTED")
 	modulate = Color(1, 1, 1, 1)
 
 
