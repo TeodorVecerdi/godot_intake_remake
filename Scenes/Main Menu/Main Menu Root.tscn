@@ -1,32 +1,51 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Background.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/ScrollingBackground.gd" type="Script" id=2]
 
 [node name="Main Menu Root" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Scrolling Background" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1800.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+ScrollSpeed = 50.0
 
 [node name="Menu Buttons" type="VBoxContainer" parent="."]
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -4.0
-margin_bottom = 4.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Play" type="TextureButton" parent="Menu Buttons"]
+margin_top = 296.0
 margin_right = 1024.0
+margin_bottom = 296.0
 focus_neighbour_left = NodePath("../Exit")
 focus_neighbour_top = NodePath("../Exit")
 focus_neighbour_right = NodePath("../Tutorial")
@@ -35,9 +54,9 @@ focus_next = NodePath("../Tutorial")
 focus_previous = NodePath("../Exit")
 
 [node name="Tutorial" type="TextureButton" parent="Menu Buttons"]
-margin_top = 4.0
+margin_top = 300.0
 margin_right = 1024.0
-margin_bottom = 4.0
+margin_bottom = 300.0
 focus_neighbour_left = NodePath("../Play")
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_right = NodePath("../Exit")
@@ -46,9 +65,9 @@ focus_next = NodePath("../Exit")
 focus_previous = NodePath("../Play")
 
 [node name="Exit" type="TextureButton" parent="Menu Buttons"]
-margin_top = 8.0
+margin_top = 304.0
 margin_right = 1024.0
-margin_bottom = 8.0
+margin_bottom = 304.0
 focus_neighbour_left = NodePath("../Tutorial")
 focus_neighbour_top = NodePath("../Tutorial")
 focus_neighbour_right = NodePath("../Play")

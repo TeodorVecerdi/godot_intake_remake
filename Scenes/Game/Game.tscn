@@ -17,6 +17,7 @@ __meta__ = {
 [node name="Game" parent="." instance=ExtResource( 2 )]
 CellsX = 8
 CellsY = 8
+Scale = null
 
 [node name="UI Canvas" type="CanvasLayer" parent="."]
 
