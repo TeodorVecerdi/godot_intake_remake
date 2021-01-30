@@ -72,10 +72,7 @@ func move(direction: int) -> void:
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
 
-	updateValidMoves()
-	updateArrows()
-	Grid.showNeighbours(gridX, gridY)
-
+	
 	# Update player sprites
 	if direction == 2 or direction == 3:  # front sprite
 		PlayerSprite.texture = Front
@@ -86,6 +83,11 @@ func move(direction: int) -> void:
 	else:  # right sprite
 		PlayerSprite.texture = Right
 
+	updateValidMoves()
+	updateArrows()
+	Grid.showNeighbours(gridX, gridY)
+	
+	yield(self, "arrowsDone")
 	emit_signal("moved", gridX, gridY)
 
 
