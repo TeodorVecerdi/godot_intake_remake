@@ -31,7 +31,6 @@ var goalY: int
 var score: int = 0
 var waitingForInput: bool = false
 var waitingForPlayerStart: bool = false
-var waitingForAnimation: bool = false
 var isGameOver: bool = false
 
 var tween: Tween
@@ -121,6 +120,7 @@ func restart() -> void:
 func returnToMainMenu() -> void:
 	score = 0
 	isGameOver = false
+	waitingForInput = false
 
 	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
 	tween.start()
@@ -142,10 +142,8 @@ func win() -> void:
 	showAll()
 	timer.stop()
 	emit_signal("levelCompleted")
-	waitingForAnimation = true
 	winLose.showWin(oldScore, score)
 	yield(winLose, "onFadeIn")
-	waitingForAnimation = false
 	waitingForInput = true
 
 
