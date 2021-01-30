@@ -1,15 +1,32 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/Background.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/ScrollingBackground.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Buttons/Play_Hover.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Buttons/Play_Normal.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Buttons/Play_Pressed.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Buttons/Exit_Pressed.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Buttons/Tutorial_Normal.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Buttons/Exit_Normal.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Buttons/Tutorial_Hover.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Buttons/Exit_Hover.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Buttons/Tutorial_Pressed.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=12]
 
 [node name="Main Menu Root" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbour_left = NodePath("CenterContainer/Menu Buttons/Play")
+focus_neighbour_top = NodePath("CenterContainer/Menu Buttons/Play")
+focus_neighbour_right = NodePath("CenterContainer/Menu Buttons/Play")
+focus_neighbour_bottom = NodePath("CenterContainer/Menu Buttons/Play")
+focus_next = NodePath("CenterContainer/Menu Buttons/Play")
+focus_previous = NodePath("CenterContainer/Menu Buttons/Play")
 size_flags_horizontal = 2
 size_flags_vertical = 2
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,45 +49,87 @@ __meta__ = {
 }
 ScrollSpeed = 50.0
 
-[node name="Menu Buttons" type="VBoxContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+focus_neighbour_left = NodePath("Menu Buttons/Play")
+focus_neighbour_top = NodePath("Menu Buttons/Play")
+focus_neighbour_right = NodePath("Menu Buttons/Play")
+focus_neighbour_bottom = NodePath("Menu Buttons/Play")
+focus_next = NodePath("Menu Buttons/Play")
+focus_previous = NodePath("Menu Buttons/Play")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Buttons" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 262.0
+margin_top = 166.0
+margin_right = 762.0
+margin_bottom = 433.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 6
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Play" type="TextureButton" parent="Menu Buttons"]
-margin_top = 296.0
-margin_right = 1024.0
-margin_bottom = 296.0
+[node name="Play" type="TextureButton" parent="CenterContainer/Menu Buttons"]
+margin_left = -1.0
+margin_right = 499.0
+margin_bottom = 85.0
+rect_min_size = Vector2( 500, 85 )
 focus_neighbour_left = NodePath("../Exit")
 focus_neighbour_top = NodePath("../Exit")
 focus_neighbour_right = NodePath("../Tutorial")
 focus_neighbour_bottom = NodePath("../Tutorial")
 focus_next = NodePath("../Tutorial")
 focus_previous = NodePath("../Exit")
+size_flags_horizontal = 6
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+expand = true
+stretch_mode = 5
 
-[node name="Tutorial" type="TextureButton" parent="Menu Buttons"]
-margin_top = 300.0
-margin_right = 1024.0
-margin_bottom = 300.0
+[node name="Tutorial" type="TextureButton" parent="CenterContainer/Menu Buttons"]
+margin_left = -1.0
+margin_top = 91.0
+margin_right = 499.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 500, 85 )
 focus_neighbour_left = NodePath("../Play")
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_right = NodePath("../Exit")
 focus_neighbour_bottom = NodePath("../Exit")
 focus_next = NodePath("../Exit")
 focus_previous = NodePath("../Play")
+size_flags_horizontal = 6
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 9 )
+expand = true
+stretch_mode = 5
 
-[node name="Exit" type="TextureButton" parent="Menu Buttons"]
-margin_top = 304.0
-margin_right = 1024.0
-margin_bottom = 304.0
+[node name="Exit" type="TextureButton" parent="CenterContainer/Menu Buttons"]
+margin_left = -1.0
+margin_top = 182.0
+margin_right = 499.0
+margin_bottom = 267.0
+rect_min_size = Vector2( 500, 85 )
 focus_neighbour_left = NodePath("../Tutorial")
 focus_neighbour_top = NodePath("../Tutorial")
 focus_neighbour_right = NodePath("../Play")
 focus_neighbour_bottom = NodePath("../Play")
 focus_next = NodePath("../Play")
 focus_previous = NodePath("../Tutorial")
+size_flags_horizontal = 6
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+[connection signal="pressed" from="CenterContainer/Menu Buttons/Play" to="." method="_onPlayPressed"]
+[connection signal="pressed" from="CenterContainer/Menu Buttons/Tutorial" to="." method="_onTutorialPressed"]
+[connection signal="pressed" from="CenterContainer/Menu Buttons/Exit" to="." method="_onExitPressed"]
