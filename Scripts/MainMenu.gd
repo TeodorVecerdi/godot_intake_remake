@@ -11,14 +11,14 @@ func _ready():
 	
 	playButton.grab_focus()
 
-	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.5)
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
 	tween.start()
 	yield(tween, "tween_completed")
 
 
 
 func _onPlayPressed() -> void:
-	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.5)
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
 	tween.start()
 	yield(tween, "tween_completed")
 	SceneManager.LoadScene(SceneManager.GAME)
