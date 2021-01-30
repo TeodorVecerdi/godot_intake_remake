@@ -25,12 +25,15 @@ var gridX: int
 var gridY: int
 var validMoves
 var movementLocked = false
-var tween: Tween
+var tweenArrows: Tween
+var tweenPlayer: Tween
 
 
 func _ready() -> void:
-	tween = Tween.new()
-	add_child(tween)
+	tweenArrows = Tween.new()
+	tweenPlayer = Tween.new()
+	add_child(tweenArrows)
+	add_child(tweenPlayer)
 	scale = Vector2(Grid.Scale, Grid.Scale)
 
 
@@ -67,21 +70,22 @@ func _input(event) -> void:
 func move(direction: int) -> void:
 	if not validMoves[direction]:
 		return
-
-	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
+	if tweenPlayer.is_active():
+		yield(tweenPlayer, "tween_all_completed")
+	position = HexConstants.ArrayToWorld(gridX, gridY, Grid.Scale) + Grid.Offset
+	var currentPosition = position
+	tweenPlayer.interpolate_property(self, "position", currentPosition, currentPosition + HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	# position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
-
 	
-	# Update player sprites
-	if direction == 2 or direction == 3:  # front sprite
-		PlayerSprite.texture = Front
-	elif direction == 0 or direction == 5:  # back sprite
-		PlayerSprite.texture = Back
-	elif direction == 4:  # left sprite
-		PlayerSprite.texture = Left
-	else:  # right sprite
-		PlayerSprite.texture = Right
+	var newPlayerTexture = getPlayerTexture(direction)
+	if newPlayerTexture != PlayerSprite.texture:
+		tweenPlayer.interpolate_property(PlayerSprite, "scale", Vector2(1,1), Vector2(0,0), 0.1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		tweenPlayer.interpolate_callback(self, 0.1, "setPlayerTexture", newPlayerTexture)
+		tweenPlayer.interpolate_property(PlayerSprite, "scale", Vector2(0,0), Vector2(1,1), 0.1, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.1)
+
+	tweenPlayer.start()
 
 	updateValidMoves()
 	updateArrows()
@@ -105,16 +109,31 @@ func lockMovement(state) -> void:
 
 
 func updateArrows() -> void:
-	tween.remove_all()
+	tweenArrows.remove_all()
 	for i in range(6):
 		if Arrows[i].visible:
-			tween.interpolate_property(Arrows[i], "scale", Vector2(0.06, 0.055), Vector2.ZERO, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+			tweenArrows.interpolate_property(Arrows[i], "scale", Vector2(0.06, 0.055), Vector2.ZERO, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	for i in range(6):
 		if validMoves[i]:
 			Arrows[i].visible = true
-			tween.interpolate_property(Arrows[i], "scale", Vector2.ZERO, Vector2(0.06, 0.055), 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-	tween.start()
-	yield(tween, "tween_all_completed")
+			tweenArrows.interpolate_property(Arrows[i], "scale", Vector2.ZERO, Vector2(0.06, 0.055), 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tweenArrows.start()
+	yield(tweenArrows, "tween_all_completed")
 	for i in range(6):
 		Arrows[i].visible = validMoves[i]
 	emit_signal("arrowsDone")
+
+
+func getPlayerTexture(direction: int) -> Texture:
+	if direction == 2 or direction == 3:  # front sprite
+		return Front
+	elif direction == 0 or direction == 5:  # back sprite
+		return Back
+	elif direction == 4:  # left sprite
+		return Left
+	else:  # right sprite
+		return Right
+
+
+func setPlayerTexture(texture: Texture) -> void:
+	PlayerSprite.texture = texture
