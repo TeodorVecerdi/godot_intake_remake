@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Square.png" type="Texture" id=5]
 
-[node name="Root" type="Control"]
+[node name="Root Game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
