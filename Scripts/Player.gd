@@ -70,13 +70,17 @@ func _input(event) -> void:
 func move(direction: int) -> void:
 	if not validMoves[direction]:
 		return
-
-	position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
+	if tweenPlayer.is_active():
+		yield(tweenPlayer, "tween_all_completed")
+	position = HexConstants.ArrayToWorld(gridX, gridY, Grid.Scale) + Grid.Offset
+	var currentPosition = position
+	tweenPlayer.interpolate_property(self, "position", currentPosition, currentPosition + HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	# position += HexConstants.DistanceToNeighbours[direction] * Grid.Scale * HexConstants.RADIUS
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
 
 	
-	# Update player sprites
+	tweenPlayer.start()
 	if direction == 2 or direction == 3:  # front sprite
 		PlayerSprite.texture = Front
 	elif direction == 0 or direction == 5:  # back sprite
