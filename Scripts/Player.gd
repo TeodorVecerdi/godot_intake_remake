@@ -7,6 +7,7 @@ export (Texture) var Left: Texture
 export (Texture) var Right: Texture
 
 signal moved(gridX, gridY)
+signal arrowsDone
 
 onready var Grid = $".".get_parent()
 onready var Arrows = [
@@ -24,9 +25,12 @@ var gridX: int
 var gridY: int
 var validMoves
 var movementLocked = false
+var tween: Tween
 
 
 func _ready() -> void:
+	tween = Tween.new()
+	add_child(tween)
 	scale = Vector2(Grid.Scale, Grid.Scale)
 
 
@@ -68,10 +72,7 @@ func move(direction: int) -> void:
 	gridX += HexConstants.NeighbourDelta[gridY % 2][direction][0]
 	gridY += HexConstants.NeighbourDelta[gridY % 2][direction][1]
 
-	updateValidMoves()
-	updateArrows()
-	Grid.showNeighbours(gridX, gridY)
-
+	
 	# Update player sprites
 	if direction == 2 or direction == 3:  # front sprite
 		PlayerSprite.texture = Front
@@ -82,6 +83,11 @@ func move(direction: int) -> void:
 	else:  # right sprite
 		PlayerSprite.texture = Right
 
+	updateValidMoves()
+	updateArrows()
+	Grid.showNeighbours(gridX, gridY)
+	
+	yield(self, "arrowsDone")
 	emit_signal("moved", gridX, gridY)
 
 
@@ -99,5 +105,16 @@ func lockMovement(state) -> void:
 
 
 func updateArrows() -> void:
+	tween.remove_all()
+	for i in range(6):
+		if Arrows[i].visible:
+			tween.interpolate_property(Arrows[i], "scale", Vector2(0.06, 0.055), Vector2.ZERO, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	for i in range(6):
+		if validMoves[i]:
+			Arrows[i].visible = true
+			tween.interpolate_property(Arrows[i], "scale", Vector2.ZERO, Vector2(0.06, 0.055), 0.2, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed")
 	for i in range(6):
 		Arrows[i].visible = validMoves[i]
+	emit_signal("arrowsDone")
