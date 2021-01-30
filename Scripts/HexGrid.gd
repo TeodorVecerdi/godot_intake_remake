@@ -44,9 +44,7 @@ func _input(event) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE and not isGameOver and not waitingForInput and not waitingForAnimation:
-			get_tree().quit()
-		elif not isGameOver:
+		if not isGameOver:
 			if event.scancode == KEY_F and waitingForInput:
 				winLose.hideActive()
 				yield(winLose, "onFadeOut")
