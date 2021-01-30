@@ -30,6 +30,7 @@ var goalY: int
 var score: int = 0
 var waitingForInput: bool = false
 var waitingForPlayerStart: bool = false
+var waitingForAnimation: bool = false
 var isGameOver: bool = false
 
 
@@ -43,7 +44,7 @@ func _input(event) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE and (not isGameOver or not waitingForInput):
+		if event.scancode == KEY_ESCAPE and not isGameOver and not waitingForInput and not waitingForAnimation:
 			get_tree().quit()
 		elif not isGameOver:
 			if event.scancode == KEY_F and waitingForInput:
@@ -110,10 +111,9 @@ func restart() -> void:
 
 
 func returnToMainMenu() -> void:
-	print("TODO: RETURN TO MAIN MENU")
 	score = 0
 	isGameOver = false
-	get_tree().quit()
+	SceneManager.call_deferred("LoadScene", SceneManager.MAIN_MENU)
 
 
 
@@ -129,8 +129,10 @@ func win() -> void:
 	showAll()
 	timer.stop()
 	emit_signal("levelCompleted")
+	waitingForAnimation = true
 	winLose.showWin(oldScore, score)
 	yield(winLose, "onFadeIn")
+	waitingForAnimation = false
 	waitingForInput = true
 
 
