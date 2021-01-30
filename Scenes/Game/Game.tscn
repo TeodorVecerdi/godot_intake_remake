@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Root.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/HexGrid.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Game UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Game/HexGrid.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Game/HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Game/Game UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Square.png" type="Texture" id=5]
 
 [node name="Root Game" type="Control"]
@@ -14,13 +14,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Game" parent="." instance=ExtResource( 3 )]
+[node name="Game" parent="." instance=ExtResource( 2 )]
 CellsX = 8
 CellsY = 8
 
 [node name="UI Canvas" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="UI Canvas" instance=ExtResource( 2 )]
+[node name="HUD" parent="UI Canvas" instance=ExtResource( 3 )]
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
