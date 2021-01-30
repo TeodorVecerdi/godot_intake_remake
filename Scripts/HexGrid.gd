@@ -2,7 +2,7 @@ extends Node2D
 class_name HexGrid
 
 const HexConstants = preload("res://Scripts/HexConstants.gd")
-const HexCell = preload("res://Scenes/HexCell.tscn")
+const HexCell = preload("res://Scenes/Game/HexCell.tscn")
 const CellIndex = preload("res://Scripts/CellIndex.gd")
 const CellNeighbour = preload("res://Scripts/CellNeighbour.gd")
 
@@ -23,6 +23,7 @@ onready var player: PlayerController = $Player
 onready var timer = $"../UI Canvas/HUD"
 onready var winLose = $"../UI Canvas/UI"
 onready var cameraController = $Camera
+onready var fade = $"../UI Canvas/Fade"
 
 var cellGrid
 var goalX: int
@@ -32,9 +33,18 @@ var waitingForInput: bool = false
 var waitingForPlayerStart: bool = false
 var isGameOver: bool = false
 
+var tween: Tween
+
 
 func _ready() -> void:
+	tween = Tween.new()
+	add_child(tween)
+	
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
 	emit_signal("levelCompleted")
+	yield(tween, "tween_completed")
+
 
 
 func _input(event) -> void:
@@ -43,9 +53,7 @@ func _input(event) -> void:
 		return
 
 	if event is InputEventKey:
-		if event.scancode == KEY_ESCAPE and (not isGameOver or not waitingForInput):
-			get_tree().quit()
-		elif not isGameOver:
+		if not isGameOver:
 			if event.scancode == KEY_F and waitingForInput:
 				winLose.hideActive()
 				yield(winLose, "onFadeOut")
@@ -110,10 +118,15 @@ func restart() -> void:
 
 
 func returnToMainMenu() -> void:
-	print("TODO: RETURN TO MAIN MENU")
 	score = 0
 	isGameOver = false
-	get_tree().quit()
+	waitingForInput = false
+
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
+	tween.start()
+	yield(tween, "tween_completed")
+
+	SceneManager.call_deferred("LoadScene", SceneManager.MAIN_MENU)
 
 
 

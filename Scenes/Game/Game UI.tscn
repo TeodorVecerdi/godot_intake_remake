@@ -14,11 +14,11 @@ size = 48
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 3 )
 
@@ -83,7 +83,7 @@ valign = 2
 margin_top = 65.0
 margin_right = 1024.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Well done!"
 align = 1
 
@@ -91,12 +91,11 @@ align = 1
 margin_top = 145.0
 margin_right = 1024.0
 margin_bottom = 202.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Score: 16"
 align = 1
 valign = 1
 uppercase = true
-percent_visible = -0.125
 
 [node name="HintContainer" type="MarginContainer" parent="Win"]
 margin_top = 530.0
@@ -270,7 +269,7 @@ valign = 2
 margin_top = 65.0
 margin_right = 1024.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Keep trying!"
 align = 1
 
@@ -278,7 +277,7 @@ align = 1
 margin_top = 145.0
 margin_right = 1024.0
 margin_bottom = 202.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Score: 16"
 align = 1
 valign = 1
