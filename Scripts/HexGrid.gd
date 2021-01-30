@@ -23,6 +23,7 @@ onready var player: PlayerController = $Player
 onready var timer = $"../UI Canvas/HUD"
 onready var winLose = $"../UI Canvas/UI"
 onready var cameraController = $Camera
+onready var fade = $"../UI Canvas/Fade"
 
 var cellGrid
 var goalX: int
@@ -33,9 +34,18 @@ var waitingForPlayerStart: bool = false
 var waitingForAnimation: bool = false
 var isGameOver: bool = false
 
+var tween: Tween
+
 
 func _ready() -> void:
+	tween = Tween.new()
+	add_child(tween)
+	
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
 	emit_signal("levelCompleted")
+	yield(tween, "tween_completed")
+
 
 
 func _input(event) -> void:
@@ -111,6 +121,11 @@ func restart() -> void:
 func returnToMainMenu() -> void:
 	score = 0
 	isGameOver = false
+
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
+	tween.start()
+	yield(tween, "tween_completed")
+
 	SceneManager.call_deferred("LoadScene", SceneManager.MAIN_MENU)
 
 
