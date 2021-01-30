@@ -6,3 +6,52 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Scrolling Background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Buttons" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -4.0
+margin_bottom = 4.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="TextureButton" parent="Menu Buttons"]
+margin_right = 1024.0
+focus_neighbour_left = NodePath("../Exit")
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_right = NodePath("../Tutorial")
+focus_neighbour_bottom = NodePath("../Tutorial")
+focus_next = NodePath("../Tutorial")
+focus_previous = NodePath("../Exit")
+
+[node name="Tutorial" type="TextureButton" parent="Menu Buttons"]
+margin_top = 4.0
+margin_right = 1024.0
+margin_bottom = 4.0
+focus_neighbour_left = NodePath("../Play")
+focus_neighbour_top = NodePath("../Play")
+focus_neighbour_right = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Play")
+
+[node name="Exit" type="TextureButton" parent="Menu Buttons"]
+margin_top = 8.0
+margin_right = 1024.0
+margin_bottom = 8.0
+focus_neighbour_left = NodePath("../Tutorial")
+focus_neighbour_top = NodePath("../Tutorial")
+focus_neighbour_right = NodePath("../Play")
+focus_neighbour_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Tutorial")
