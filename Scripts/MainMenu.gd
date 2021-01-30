@@ -1,10 +1,16 @@
 extends Control
 
+onready var playButton = $"CenterContainer/Menu Buttons/Play"
+
+func _ready():
+	playButton.grab_focus()
+
+
 func _onPlayPressed() -> void:
-	print("PLAY")
+	SceneManager.LoadScene(SceneManager.GAME)
 
 func _onTutorialPressed() -> void:
-	print("TUTORIAL")
+	SceneManager.LoadScene(SceneManager.TUTORIAL)
 
 func _onExitPressed() -> void:
 	get_tree().quit()
