@@ -2,7 +2,7 @@ extends Node2D
 class_name HexGrid
 
 const HexConstants = preload("res://Scripts/HexConstants.gd")
-const HexCell = preload("res://Scenes/HexCell.tscn")
+const HexCell = preload("res://Scenes/Game/HexCell.tscn")
 const CellIndex = preload("res://Scripts/CellIndex.gd")
 const CellNeighbour = preload("res://Scripts/CellNeighbour.gd")
 
