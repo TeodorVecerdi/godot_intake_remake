@@ -19,6 +19,12 @@ var totalTime: float
 var enabled = false
 var fillAmount: float
 
+var tween: Tween
+
+func _ready():
+	tween = Tween.new()
+	add_child(tween)
+
 
 func _process(delta) -> void:
 	if not enabled:
@@ -34,11 +40,13 @@ func _process(delta) -> void:
 
 	# change good -> warning
 	if fillAmount > WarningBracket and newFillAmount <= WarningBracket:
-		TimerProgress.tint_progress = WarningColor
+		tween.interpolate_property(TimerProgress, "tint_progress", GoodColor, WarningColor, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		tween.start()
 
 	# change warning -> bad
 	if fillAmount > BadBracket and newFillAmount <= BadBracket:
-		TimerProgress.tint_progress = BadColor
+		tween.interpolate_property(TimerProgress, "tint_progress", WarningColor, BadColor, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		tween.start()
 
 	fillAmount = newFillAmount
 	TimerProgress.ratio = fillAmount
@@ -46,26 +54,30 @@ func _process(delta) -> void:
 
 
 func _onHexGridNewLevel() -> void:
-	modulate = Color(.5, .5, .5, 1)
+	pass
+	# modulate = Color(.5, .5, .5, 1)
 
 
 func _onHexGridLevelStarted() -> void:
-	modulate = Color(1, 1, 1, 1)
+	pass
+	# modulate = Color(1, 1, 1, 1)
 
 
 func start() -> void:
 	fillAmount = 1.0
-	TimerProgress.tint_progress = GoodColor
-	TimerProgress.ratio = fillAmount
+	tween.interpolate_property(TimerProgress, "tint_progress", null, GoodColor, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.interpolate_property(TimerProgress, "ratio", null, 1.0, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
 	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
 	enabled = true
 
 
 func restart(_timeLeft: float = -1.0) -> void:
 	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
-	fillAmount = 1.0
-	TimerProgress.tint_progress = GoodColor
-	TimerProgress.ratio = fillAmount
+	fillAmount = timeLeft / totalTime
+	tween.interpolate_property(TimerProgress, "tint_progress", null, GoodColor, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.interpolate_property(TimerProgress, "ratio", null, fillAmount, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
 	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
 	enabled = true
 
@@ -78,7 +90,8 @@ func stop() -> void:
 func reset(_totalTime: float, _timeLeft: float = -1.0) -> void:
 	totalTime = _totalTime
 	timeLeft = _timeLeft if _timeLeft != -1.0 else totalTime
-	fillAmount = 1.0
-	TimerProgress.tint_progress = GoodColor
-	TimerProgress.ratio = fillAmount
+	fillAmount = timeLeft / totalTime
+	tween.interpolate_property(TimerProgress, "tint_progress", null, GoodColor, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.interpolate_property(TimerProgress, "ratio", null, fillAmount, 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+	tween.start()
 	TimerText.text = "%.1fs / %.1fs" % [timeLeft, totalTime]
