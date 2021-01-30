@@ -19,6 +19,12 @@ var totalTime: float
 var enabled = false
 var fillAmount: float
 
+var tween: Tween
+
+func _ready():
+	tween = Tween.new()
+	add_child(tween)
+
 
 func _process(delta) -> void:
 	if not enabled:
