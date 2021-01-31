@@ -2,12 +2,14 @@ extends Node
 
 const MainMenu = preload("res://Scenes/Main Menu/Main Menu Root.tscn")
 const Game = preload("res://Scenes/Game/Game.tscn")
+const GameSettings = preload("res://Scenes/Main Menu/Game Settings.tscn")
 
 const MAIN_MENU = 0
 const GAME = 1
 const TUTORIAL = 2
+const GAME_SETTINGS = 3
 
-const _validScenes = [MAIN_MENU, GAME, TUTORIAL]
+const _validScenes = [MAIN_MENU, GAME, TUTORIAL,GAME_SETTINGS]
 var root: Viewport
 
 func _enter_tree() -> void:
@@ -37,3 +39,10 @@ func _loadSceneImpl(sceneIndex: int) -> void:
 	elif sceneIndex == TUTORIAL:
 		print("Loading tutorial scene [fail]")
 		# print(get_tree().root.get_child(1).name)
+	elif sceneIndex == GAME_SETTINGS:
+		print("Loading game settings scene")
+		var currentScene = root.get_child(root.get_child_count()-1)
+		var newScene = GameSettings.instance()
+		root.add_child(newScene)
+		root.remove_child(currentScene)
+		currentScene.queue_free()
