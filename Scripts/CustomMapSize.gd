@@ -11,8 +11,8 @@ func _ready():
 	optionButton = get_node(OptionButtonPath)
 	targetNode = get_node(ShowPath)
 
-	optionButton.connect("item_selected", self, "_onItemSelected")
+	optionButton.connect("item_selected", self, "onItemSelected")
 
 
-func _onItemSelected(index: int) -> void:
+func onItemSelected(index: int) -> void:
 	targetNode.visible = index == ShowOnValue
