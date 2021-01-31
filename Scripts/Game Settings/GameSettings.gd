@@ -60,7 +60,7 @@ func _onPlayClicked() -> void:
 	SettingsPresets.SETTINGS["maxTime"] = maxTime
 	SettingsPresets.SETTINGS["stdPasses"] = stdPasses
 	SettingsPresets.SETTINGS["rndPasses"] = rndPasses
-	print(SettingsPresets.SETTINGS)
+	SceneManager.LoadScene(SceneManager.GAME)
 
 
 func setPreset(presetSettings) -> void:
