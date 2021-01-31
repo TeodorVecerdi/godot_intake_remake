@@ -4,7 +4,7 @@ const PRESETS = [
 	{
 		"name": "Very Easy",
 		"map_size": 0,
-		"timer_reset_type": [0, -1],
+		"timer_reset_type": [0, 0],
 		"max_time": 60,
 		"wall_std": 1,
 		"wall_rnd": 0
