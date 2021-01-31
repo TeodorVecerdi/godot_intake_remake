@@ -1,17 +1,17 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Sprites/Background.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/ScrollingBackground.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Square.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Resources/Fonts/Roboto-Medium.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Resources/Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Resources/Styles/OptionButtonStyle.tres" type="StyleBox" id=7]
-[ext_resource path="res://Scripts/CustomMapSize.gd" type="Script" id=8]
+[ext_resource path="res://Resources/Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Resources/Fonts/Roboto-Medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sprites/Background.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/ScrollingBackground.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/CustomMapSize.gd" type="Script" id=7]
+[ext_resource path="res://Resources/Styles/OptionButtonStyle.tres" type="StyleBox" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
-font_data = ExtResource( 4 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxLine" id=7]
 color = Color( 1, 1, 1, 1 )
@@ -21,7 +21,7 @@ thickness = 2
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 1, 1, 1, 1 )
@@ -48,12 +48,12 @@ expand_margin_bottom = 12.0
 [sub_resource type="DynamicFont" id=8]
 size = 24
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 26
 use_filter = true
-font_data = ExtResource( 6 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxLine" id=14]
 color = Color( 1, 1, 1, 1 )
@@ -86,11 +86,11 @@ func _onItemSelected(index: int) -> void:
 [sub_resource type="DynamicFont" id=15]
 size = 28
 use_filter = true
-font_data = ExtResource( 5 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -100,9 +100,9 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 2 )
 
-[node name="Map Settings" type="Control"]
+[node name="Game Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -811.345, -270.687 )
@@ -121,10 +121,10 @@ grow_vertical = 0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 1 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,7 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 expand = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background"]
@@ -173,7 +173,7 @@ margin_right = 864.0
 margin_bottom = 57.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 1 )
-text = "Map Settings"
+text = "Game Settings"
 align = 1
 valign = 2
 
@@ -216,8 +216,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/disabled = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
 custom_styles/normal = SubResource( 12 )
 custom_fonts/font = SubResource( 8 )
 text = "VERY EASY"
@@ -281,8 +281,8 @@ margin_top = 4.0
 margin_right = 592.0
 margin_bottom = 35.0
 script = SubResource( 16 )
-OptionButtonPath = NodePath("OptionButton")
-ShowPath = NodePath("SpinBox")
+OptionButtonPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer/OptionButton")
+ShowPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer/SpinBox")
 ShowOnValue = 4
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer"]
@@ -292,8 +292,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/disabled = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
 custom_styles/normal = SubResource( 12 )
 custom_fonts/font = SubResource( 8 )
 text = "Very Small"
@@ -352,9 +352,9 @@ margin_left = 20.0
 margin_top = 4.0
 margin_right = 592.0
 margin_bottom = 35.0
-script = ExtResource( 8 )
-OptionButtonPath = NodePath("OptionButton")
-ShowPath = NodePath("SpinBox")
+script = ExtResource( 7 )
+OptionButtonPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/OptionButton")
+ShowPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/SpinBox")
 ShowOnValue = 1
 
 [node name="OptionButton" type="OptionButton" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer"]
@@ -364,8 +364,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = ExtResource( 7 )
-custom_styles/disabled = ExtResource( 7 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
 custom_styles/normal = SubResource( 12 )
 custom_fonts/font = SubResource( 8 )
 text = "Reset"
