@@ -1,5 +1,14 @@
 extends Node
 
+var SETTINGS = {
+	"mapSize": 0,
+	"resetType": 0,
+	"addTime": 0,
+	"maxTime": 0,
+	"stdPasses": 0,
+	"rndPasses": 0
+}
+
 const PRESETS = [
 	{
 		"name": "Very Easy",
