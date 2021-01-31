@@ -467,6 +467,7 @@ margin_top = 4.0
 margin_right = 592.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 0, 32 )
+min_value = 1.0
 max_value = 6.0
 step = 1.0
 value = 1.0
@@ -513,9 +514,10 @@ margin_top = 4.0
 margin_right = 592.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 0, 32 )
-max_value = 6.0
+max_value = 10.0
 step = 1.0
 rounded = true
+allow_greater = true
 align = 3
 
 [node name="Play" type="Button" parent="MarginContainer/Background/VBoxContainer"]
