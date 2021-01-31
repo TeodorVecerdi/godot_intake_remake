@@ -6,8 +6,6 @@ const HexCell = preload("res://Scenes/Game/HexCell.tscn")
 const CellIndex = preload("res://Scripts/CellIndex.gd")
 const CellNeighbour = preload("res://Scripts/CellNeighbour.gd")
 
-export (int) var CellsX: int = 4
-export (int) var CellsY: int = 4
 export var Scale: float = 1.0
 export (Vector2) var Offset: Vector2 = Vector2(90, 101)
 
@@ -25,6 +23,14 @@ onready var winLose = $"../UI Canvas/UI"
 onready var cameraController = $Camera
 onready var fade = $"../UI Canvas/Fade"
 
+var CellsX: int = 4
+var CellsY: int = 4
+var _settingsStdPasses: int
+var _settingsRndPasses: int
+var _settingsMaxTime: int
+var _settingsTimerResets: bool
+var _settingsAddTime: int
+
 var cellGrid
 var goalX: int
 var goalY: int
@@ -39,6 +45,8 @@ var tween: Tween
 func _ready() -> void:
 	tween = Tween.new()
 	add_child(tween)
+
+	loadSettings()
 	
 	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.start()
@@ -46,6 +54,18 @@ func _ready() -> void:
 	yield(tween, "tween_completed")
 
 
+
+func loadSettings():
+	CellsX = SettingsPresets.SETTINGS["mapSize"]
+	CellsY = CellsX
+
+	_settingsStdPasses = SettingsPresets.SETTINGS["stdPasses"]
+	_settingsRndPasses = SettingsPresets.SETTINGS["rndPasses"]
+	_settingsMaxTime = SettingsPresets.SETTINGS["maxTime"]
+	_settingsTimerResets = SettingsPresets.SETTINGS["resetType"] == 0
+	_settingsAddTime = SettingsPresets.SETTINGS["addTime"]
+
+	
 
 func _input(event) -> void:
 	var isPressed = event.is_pressed() and not event.is_echo()
@@ -99,6 +119,7 @@ func _onTimerStopped() -> void:
 
 
 func _onTimerReady() -> void:
+	timer.timeLeft = _settingsMaxTime
 	startLevel(true)
 
 
@@ -129,7 +150,6 @@ func returnToMainMenu() -> void:
 	SceneManager.call_deferred("LoadScene", SceneManager.MAIN_MENU)
 
 
-
 func win() -> void:
 	var scoreIncrease: int = 1
 	if timer.fillAmount > timer.WarningBracket:
@@ -154,18 +174,28 @@ func startLevel(skipTransition: bool = false) -> void:
 		cameraController.levelFadeOut()
 		yield(cameraController, "onLevelFadeOut")
 	generateMaze()
+	showAll()
 	player.reset()
 	if not skipTransition:
 		cameraController.levelFadeIn()
 		yield(cameraController, "onLevelFadeIn")
 	waitingForPlayerStart = true
 	emit_signal("newLevel")
-	timer.reset(60.0)
+	if _settingsTimerResets:
+		timer.reset(_settingsMaxTime)
+	else:
+		var timeLeft = timer.timeLeft
+		var newTimeLeft = timeLeft + _settingsAddTime
+		newTimeLeft = clamp(newTimeLeft, 0, _settingsMaxTime)
+		timer.reset(_settingsMaxTime, newTimeLeft)
 
 
 func generateMaze() -> void:
 	resetMaze()
-	generateMazeWalls()
+	for _i in range(_settingsStdPasses):
+		generateMazeWalls()
+	for _i in range(_settingsRndPasses):
+		generateMazeWallsRandom()
 	hideAdjacentWalls()
 
 	for y in range(CellsY):
@@ -235,6 +265,20 @@ func generateMazeWalls() -> void:
 		else:
 			print("EXITED MAZE GENERATION EARLY")
 			break
+
+
+func generateMazeWallsRandom():
+	var cellsRemaining = 2 * CellsX
+	while cellsRemaining > 0:
+		var cellX = randi() % CellsX
+		var cellY = randi() % CellsY
+		var neighbours = getNeighboursIndices(cellX, cellY)
+		var neighbourLength = len(neighbours)
+		if neighbourLength != 0:
+			var chosen = neighbours[randi() % neighbourLength]
+			setWall(chosen.direction, false, cellX, cellY)
+		cellsRemaining-=1
+
 
 
 func hideAdjacentWalls() -> void:

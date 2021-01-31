@@ -1,0 +1,559 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Resources/Fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Resources/Fonts/Roboto-Medium.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Sprites/Background.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/CustomMapSize.gd" type="Script" id=7]
+[ext_resource path="res://Resources/Styles/OptionButtonStyle.tres" type="StyleBox" id=8]
+[ext_resource path="res://Scripts/Game Settings/MaxTimeSettings.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Game Settings/WallRandomSettings.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/Game Settings/MapSizeSettings.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Game Settings/WallStandardSettings.gd" type="Script" id=12]
+[ext_resource path="res://Scripts/Game Settings/TimerResetTypeSettings.gd" type="Script" id=13]
+[ext_resource path="res://Scripts/Game Settings/GameSettings.gd" type="Script" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxLine" id=7]
+color = Color( 1, 1, 1, 1 )
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 0 )
+border_blend = true
+expand_margin_bottom = 12.0
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 26
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxLine" id=14]
+color = Color( 1, 1, 1, 1 )
+grow_begin = -4.0
+grow_end = -4.0
+thickness = 2
+vertical = true
+
+[sub_resource type="DynamicFont" id=15]
+size = 28
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="Game Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -811.345, -270.687 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scrolling Background" type="TextureRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1800.0
+margin_bottom = 0.00012207
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 48
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 48
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="MarginContainer"]
+self_modulate = Color( 0.6075, 0.695375, 0.75, 0.333333 )
+margin_left = 64.0
+margin_top = 48.0
+margin_right = 960.0
+margin_bottom = 552.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 18.5227
+margin_top = 16.0
+margin_right = -13.4773
+margin_bottom = -16.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="MarginContainer/Background/VBoxContainer"]
+margin_right = 864.0
+margin_bottom = 57.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "Game Settings"
+align = 1
+valign = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/Background/VBoxContainer"]
+margin_top = 61.0
+margin_right = 864.0
+margin_bottom = 69.0
+size_flags_vertical = 0
+custom_styles/separator = SubResource( 7 )
+custom_constants/separation = 8
+
+[node name="Presets" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer"]
+margin_top = 73.0
+margin_right = 864.0
+margin_bottom = 112.0
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Presets"]
+margin_right = 314.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 9 )
+text = "DIFFICULTY PRESETS"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Presets"]
+margin_left = 318.0
+margin_right = 864.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Background/VBoxContainer/Presets/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 538.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
+text = "EASY"
+items = [ "VERY EASY", null, false, 0, null, "EASY", null, false, 1, null, "NORMAL", null, false, 2, null, "HARD", null, false, 3, null, "EXTREME", null, false, 4, null, "Custom", null, false, 5, null ]
+selected = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/Background/VBoxContainer"]
+margin_top = 116.0
+margin_right = 864.0
+margin_bottom = 124.0
+size_flags_vertical = 0
+custom_styles/separator = SubResource( 7 )
+custom_constants/separation = 8
+
+[node name="Settings" type="ScrollContainer" parent="MarginContainer/Background/VBoxContainer"]
+margin_top = 128.0
+margin_right = 864.0
+margin_bottom = 420.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Contents" type="VBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings"]
+margin_right = 864.0
+margin_bottom = 266.0
+size_flags_horizontal = 3
+
+[node name="Map Size" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_right = 864.0
+margin_bottom = 39.0
+script = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size"]
+margin_right = 240.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 13 )
+text = "Map Size"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size"]
+margin_left = 244.0
+margin_right = 260.0
+margin_bottom = 39.0
+custom_styles/separator = SubResource( 14 )
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size"]
+margin_left = 264.0
+margin_right = 864.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 592.0
+margin_bottom = 35.0
+script = ExtResource( 7 )
+OptionButtonPath = NodePath("OptionButton")
+ShowPath = NodePath("SpinBox")
+ShowOnValue = 4
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer"]
+margin_right = 572.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
+text = "Very Small"
+items = [ "Very Small", null, false, 0, null, "Small", null, false, 1, null, "Medium", null, false, 2, null, "Large", null, false, 3, null, "CUSTOM", null, false, 4, null ]
+selected = 0
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 619.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 32 )
+min_value = 8.0
+max_value = 64.0
+step = 2.0
+value = 8.0
+rounded = true
+allow_greater = true
+align = 3
+suffix = "cells"
+
+[node name="Timer Reset Type" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_top = 43.0
+margin_right = 864.0
+margin_bottom = 82.0
+script = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type"]
+margin_right = 240.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 13 )
+text = "Timer Reset Type"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type"]
+margin_left = 244.0
+margin_right = 260.0
+margin_bottom = 39.0
+custom_styles/separator = SubResource( 14 )
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type"]
+margin_left = 264.0
+margin_right = 864.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 592.0
+margin_bottom = 35.0
+script = ExtResource( 7 )
+OptionButtonPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/OptionButton")
+ShowPath = NodePath("../../../../../../../../../Game Settings/MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/SpinBox")
+ShowOnValue = 1
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer"]
+margin_right = 572.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = ExtResource( 8 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 8 )
+text = "Reset"
+items = [ "Reset", null, false, 0, null, "Add Time", null, false, 1, null ]
+selected = 0
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 564.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 32 )
+max_value = 10000.0
+step = 1.0
+value = 30.0
+rounded = true
+allow_greater = true
+align = 3
+suffix = "sec"
+
+[node name="Timer Max Value" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_top = 86.0
+margin_right = 864.0
+margin_bottom = 126.0
+script = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value"]
+margin_right = 240.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 13 )
+text = "Maximum Time"
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value"]
+margin_left = 244.0
+margin_right = 260.0
+margin_bottom = 40.0
+custom_styles/separator = SubResource( 14 )
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value"]
+margin_left = 264.0
+margin_right = 864.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 592.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 32 )
+max_value = 10000.0
+step = 1.0
+value = 60.0
+rounded = true
+allow_greater = true
+align = 3
+suffix = "sec"
+
+[node name="Walls" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_top = 130.0
+margin_right = 864.0
+margin_bottom = 178.0
+rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 15 )
+text = "Wall Generation"
+valign = 2
+
+[node name="Wall Standard" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_top = 182.0
+margin_right = 864.0
+margin_bottom = 222.0
+script = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard"]
+margin_right = 240.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 13 )
+text = "Standard Passes"
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard"]
+margin_left = 244.0
+margin_right = 260.0
+margin_bottom = 40.0
+custom_styles/separator = SubResource( 14 )
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard"]
+margin_left = 264.0
+margin_right = 864.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 592.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 32 )
+min_value = 1.0
+max_value = 6.0
+step = 1.0
+value = 1.0
+rounded = true
+align = 3
+
+[node name="Wall Random" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents"]
+margin_top = 226.0
+margin_right = 864.0
+margin_bottom = 266.0
+script = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random"]
+margin_right = 240.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 13 )
+text = "Random Passes"
+valign = 1
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random"]
+margin_left = 244.0
+margin_right = 260.0
+margin_bottom = 40.0
+custom_styles/separator = SubResource( 14 )
+custom_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random"]
+margin_left = 264.0
+margin_right = 864.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 4
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random/MarginContainer"]
+margin_left = 20.0
+margin_top = 4.0
+margin_right = 592.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 32 )
+max_value = 10.0
+step = 1.0
+rounded = true
+allow_greater = true
+align = 3
+
+[node name="Play" type="Button" parent="MarginContainer/Background/VBoxContainer"]
+margin_top = 424.0
+margin_right = 864.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 180, 48 )
+size_flags_horizontal = 3
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
+text = "PLAY"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade" type="TextureRect" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+[connection signal="item_selected" from="MarginContainer/Background/VBoxContainer/Presets/MarginContainer/OptionButton" to="." method="_onPresetChanged"]
+[connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size" to="." method="_on_Map_Size_onValueChanged"]
+[connection signal="item_selected" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer/OptionButton" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size" method="_onPresetChanged"]
+[connection signal="value_changed" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer/SpinBox" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size" method="_onSpinBoxValueChanged"]
+[connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type" to="." method="_on_Timer_Reset_Type_onValueChanged"]
+[connection signal="item_selected" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/OptionButton" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type" method="_onTypeChanged"]
+[connection signal="value_changed" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type/MarginContainer/VBoxContainer/SpinBox" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type" method="_onSpinBoxValueChanged"]
+[connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value" to="." method="_on_Timer_Max_Value_onValueChanged"]
+[connection signal="value_changed" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value/MarginContainer/SpinBox" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value" method="_onSpinBoxValueChanged"]
+[connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard" to="." method="_on_Wall_Standard_onValueChanged"]
+[connection signal="value_changed" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard/MarginContainer/SpinBox" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard" method="_onSpinBoxValueChanged"]
+[connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random" to="." method="_on_Wall_Random_onValueChanged"]
+[connection signal="value_changed" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random/MarginContainer/SpinBox" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random" method="_onSpinBoxValueChanged"]
+[connection signal="pressed" from="MarginContainer/Background/VBoxContainer/Play" to="." method="_onPlayClicked"]
