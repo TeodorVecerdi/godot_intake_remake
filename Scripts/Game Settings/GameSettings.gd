@@ -7,6 +7,8 @@ onready var timerMaxValueSettings = $"MarginContainer/Background/VBoxContainer/S
 onready var wallStandardSettings = $"MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard"
 onready var wallRandomSettings = $"MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random"
 
+onready var fade = $Fade
+
 var mapSize: int
 var resetType: int
 var addTime: int
@@ -14,10 +16,18 @@ var maxTime: int
 var stdPasses: int
 var rndPasses: int
 
+var tween: Tween
+
 
 func _ready():
+	tween = Tween.new()
+	add_child(tween)
+
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
+	tween.start()
 	presetInput.selected = 0
 	setPreset(SettingsPresets.PRESETS[0])
+	yield(tween, "tween_completed")
 
 
 func _onPresetChanged(preset: int):
@@ -60,6 +70,10 @@ func _onPlayClicked() -> void:
 	SettingsPresets.SETTINGS["maxTime"] = maxTime
 	SettingsPresets.SETTINGS["stdPasses"] = stdPasses
 	SettingsPresets.SETTINGS["rndPasses"] = rndPasses
+	
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
+	tween.start()
+	yield(tween, "tween_completed")
 	SceneManager.LoadScene(SceneManager.GAME)
 
 

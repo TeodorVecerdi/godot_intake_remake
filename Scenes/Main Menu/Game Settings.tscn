@@ -533,6 +533,14 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Fade" type="TextureRect" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
 [connection signal="item_selected" from="MarginContainer/Background/VBoxContainer/Presets/MarginContainer/OptionButton" to="." method="_onPresetChanged"]
 [connection signal="onValueChanged" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size" to="." method="_on_Map_Size_onValueChanged"]
 [connection signal="item_selected" from="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size/MarginContainer/VBoxContainer/OptionButton" to="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size" method="_onPresetChanged"]
