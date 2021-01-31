@@ -65,6 +65,7 @@ func loadSettings():
 	_settingsTimerResets = SettingsPresets.SETTINGS["resetType"] == 0
 	_settingsAddTime = SettingsPresets.SETTINGS["addTime"]
 
+	
 
 func _input(event) -> void:
 	var isPressed = event.is_pressed() and not event.is_echo()
@@ -118,6 +119,7 @@ func _onTimerStopped() -> void:
 
 
 func _onTimerReady() -> void:
+	timer.timeLeft = _settingsMaxTime
 	startLevel(true)
 
 
@@ -178,7 +180,13 @@ func startLevel(skipTransition: bool = false) -> void:
 		yield(cameraController, "onLevelFadeIn")
 	waitingForPlayerStart = true
 	emit_signal("newLevel")
-	timer.reset(60.0)
+	if _settingsTimerResets:
+		timer.reset(_settingsMaxTime)
+	else:
+		var timeLeft = timer.timeLeft
+		var newTimeLeft = timeLeft + _settingsAddTime
+		newTimeLeft = clamp(newTimeLeft, 0, _settingsMaxTime)
+		timer.reset(_settingsMaxTime, newTimeLeft)
 
 
 func generateMaze() -> void:
