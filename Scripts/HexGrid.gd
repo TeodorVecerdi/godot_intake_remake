@@ -174,6 +174,7 @@ func startLevel(skipTransition: bool = false) -> void:
 		cameraController.levelFadeOut()
 		yield(cameraController, "onLevelFadeOut")
 	generateMaze()
+	showAll()
 	player.reset()
 	if not skipTransition:
 		cameraController.levelFadeIn()
@@ -191,7 +192,10 @@ func startLevel(skipTransition: bool = false) -> void:
 
 func generateMaze() -> void:
 	resetMaze()
-	generateMazeWalls()
+	for _i in range(_settingsStdPasses):
+		generateMazeWalls()
+	for _i in range(_settingsRndPasses):
+		generateMazeWallsRandom()
 	hideAdjacentWalls()
 
 	for y in range(CellsY):
@@ -261,6 +265,20 @@ func generateMazeWalls() -> void:
 		else:
 			print("EXITED MAZE GENERATION EARLY")
 			break
+
+
+func generateMazeWallsRandom():
+	var cellsRemaining = 2 * CellsX
+	while cellsRemaining > 0:
+		var cellX = randi() % CellsX
+		var cellY = randi() % CellsY
+		var neighbours = getNeighboursIndices(cellX, cellY)
+		var neighbourLength = len(neighbours)
+		if neighbourLength != 0:
+			var chosen = neighbours[randi() % neighbourLength]
+			setWall(chosen.direction, false, cellX, cellY)
+		cellsRemaining-=1
+
 
 
 func hideAdjacentWalls() -> void:
