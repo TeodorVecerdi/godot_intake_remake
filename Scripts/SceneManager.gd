@@ -22,14 +22,14 @@ func LoadScene(sceneIndex: int) -> void:
 func _loadSceneImpl(sceneIndex: int) -> void:
 	if sceneIndex == MAIN_MENU:
 		print("Loading main menu scene")
-		var currentScene = root.get_child(1)
+		var currentScene = root.get_child(root.get_child_count()-1)
 		var newScene = MainMenu.instance()
 		root.add_child(newScene)
 		root.remove_child(currentScene)
 		currentScene.queue_free()
 	elif sceneIndex == GAME:
 		print("Loading game scene")
-		var currentScene = root.get_child(1)
+		var currentScene = root.get_child(root.get_child_count()-1)
 		var newScene = Game.instance()
 		root.add_child(newScene)
 		root.remove_child(currentScene)
