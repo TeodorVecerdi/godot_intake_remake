@@ -54,7 +54,13 @@ func _on_Wall_Random_onValueChanged(passes: int):
 
 
 func _onPlayClicked() -> void:
-	print(mapSize, resetType, addTime, maxTime, stdPasses, rndPasses)
+	SettingsPresets.SETTINGS["mapSize"] = mapSize
+	SettingsPresets.SETTINGS["resetType"] = resetType
+	SettingsPresets.SETTINGS["addTime"] = addTime
+	SettingsPresets.SETTINGS["maxTime"] = maxTime
+	SettingsPresets.SETTINGS["stdPasses"] = stdPasses
+	SettingsPresets.SETTINGS["rndPasses"] = rndPasses
+	print(SettingsPresets.SETTINGS)
 
 
 func setPreset(presetSettings) -> void:
