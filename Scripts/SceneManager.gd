@@ -24,25 +24,18 @@ func LoadScene(sceneIndex: int) -> void:
 func _loadSceneImpl(sceneIndex: int) -> void:
 	if sceneIndex == MAIN_MENU:
 		print("Loading main menu scene")
-		var currentScene = root.get_child(root.get_child_count()-1)
-		var newScene = MainMenu.instance()
-		root.add_child(newScene)
-		root.remove_child(currentScene)
-		currentScene.queue_free()
+		_swapScene(MainMenu.instance())
 	elif sceneIndex == GAME:
 		print("Loading game scene")
-		var currentScene = root.get_child(root.get_child_count()-1)
-		var newScene = Game.instance()
-		root.add_child(newScene)
-		root.remove_child(currentScene)
-		currentScene.queue_free()
+		_swapScene(Game.instance())
 	elif sceneIndex == TUTORIAL:
 		print("Loading tutorial scene [fail]")
-		# print(get_tree().root.get_child(1).name)
 	elif sceneIndex == GAME_SETTINGS:
 		print("Loading game settings scene")
-		var currentScene = root.get_child(root.get_child_count()-1)
-		var newScene = GameSettings.instance()
-		root.add_child(newScene)
-		root.remove_child(currentScene)
-		currentScene.queue_free()
+		_swapScene(GameSettings.instance())
+
+func _swapScene(newScene: Node):
+	var currentScene = root.get_child(root.get_child_count()-1)
+	root.add_child(newScene)
+	root.remove_child(currentScene)
+	currentScene.queue_free()
