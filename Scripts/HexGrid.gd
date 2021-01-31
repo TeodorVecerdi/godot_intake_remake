@@ -6,8 +6,6 @@ const HexCell = preload("res://Scenes/Game/HexCell.tscn")
 const CellIndex = preload("res://Scripts/CellIndex.gd")
 const CellNeighbour = preload("res://Scripts/CellNeighbour.gd")
 
-export (int) var CellsX: int = 4
-export (int) var CellsY: int = 4
 export var Scale: float = 1.0
 export (Vector2) var Offset: Vector2 = Vector2(90, 101)
 
@@ -25,6 +23,14 @@ onready var winLose = $"../UI Canvas/UI"
 onready var cameraController = $Camera
 onready var fade = $"../UI Canvas/Fade"
 
+var CellsX: int = 4
+var CellsY: int = 4
+var _settingsStdPasses: int
+var _settingsRndPasses: int
+var _settingsMaxTime: int
+var _settingsTimerResets: bool
+var _settingsAddTime: int
+
 var cellGrid
 var goalX: int
 var goalY: int
@@ -39,12 +45,25 @@ var tween: Tween
 func _ready() -> void:
 	tween = Tween.new()
 	add_child(tween)
+
+	loadSettings()
 	
 	tween.interpolate_property(fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 2.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.start()
 	emit_signal("levelCompleted")
 	yield(tween, "tween_completed")
 
+
+
+func loadSettings():
+	CellsX = SettingsPresets.SETTINGS["mapSize"]
+	CellsY = CellsX
+
+	_settingsStdPasses = SettingsPresets.SETTINGS["stdPasses"]
+	_settingsRndPasses = SettingsPresets.SETTINGS["rndPasses"]
+	_settingsMaxTime = SettingsPresets.SETTINGS["maxTime"]
+	_settingsTimerResets = SettingsPresets.SETTINGS["resetType"] == 0
+	_settingsAddTime = SettingsPresets.SETTINGS["addTime"]
 
 
 func _input(event) -> void:
@@ -127,7 +146,6 @@ func returnToMainMenu() -> void:
 	yield(tween, "tween_completed")
 
 	SceneManager.call_deferred("LoadScene", SceneManager.MAIN_MENU)
-
 
 
 func win() -> void:
