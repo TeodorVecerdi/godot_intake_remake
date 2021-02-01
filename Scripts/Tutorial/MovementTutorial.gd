@@ -18,9 +18,9 @@ onready var Arrows = [
 	$"Control/Player/Arrows/arrow_up_left"
 ]
 
-export (float) var AnimationSpeed: float = 1.0
-export (float) var ScaleArrows: float = 1.25
-export (float) var ScaleKeys: float = 1.2
+export (float) var AnimationSpeed: float = 0.25
+export (float) var ScaleArrows: float = 1.5
+export (float) var ScaleKeys: float = 1.5
 
 var tween: Tween
 
