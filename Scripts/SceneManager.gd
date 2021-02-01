@@ -3,6 +3,7 @@ extends Node
 const MainMenu = preload("res://Scenes/Main Menu/Main Menu Root.tscn")
 const Game = preload("res://Scenes/Game/Game.tscn")
 const GameSettings = preload("res://Scenes/Main Menu/Game Settings.tscn")
+const Tutorial = preload("res://Scenes/Main Menu/Tutorial.tscn")
 
 const MAIN_MENU = 0
 const GAME = 1
@@ -29,7 +30,8 @@ func _loadSceneImpl(sceneIndex: int) -> void:
 		print("Loading game scene")
 		_swapScene(Game.instance())
 	elif sceneIndex == TUTORIAL:
-		print("Loading tutorial scene [fail]")
+		print("Loading tutorial scene")
+		_swapScene(Tutorial.instance())
 	elif sceneIndex == GAME_SETTINGS:
 		print("Loading game settings scene")
 		_swapScene(GameSettings.instance())
