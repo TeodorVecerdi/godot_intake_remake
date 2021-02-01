@@ -24,6 +24,9 @@ func _onPlayPressed() -> void:
 	SceneManager.LoadScene(SceneManager.GAME_SETTINGS)
 
 func _onTutorialPressed() -> void:
+	tween.interpolate_property(fade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
+	tween.start()
+	yield(tween, "tween_completed")
 	SceneManager.LoadScene(SceneManager.TUTORIAL)
 
 func _onExitPressed() -> void:
