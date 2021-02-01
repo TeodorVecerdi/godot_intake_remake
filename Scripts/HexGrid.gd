@@ -174,7 +174,6 @@ func startLevel(skipTransition: bool = false) -> void:
 		cameraController.levelFadeOut()
 		yield(cameraController, "onLevelFadeOut")
 	generateMaze()
-	showAll()
 	player.reset()
 	if not skipTransition:
 		cameraController.levelFadeIn()
