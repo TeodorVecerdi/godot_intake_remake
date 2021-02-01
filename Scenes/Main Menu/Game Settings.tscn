@@ -18,31 +18,31 @@
 size = 48
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxLine" id=7]
+[sub_resource type="StyleBoxLine" id=2]
 color = Color( 1, 1, 1, 1 )
 grow_begin = 0.0
 grow_end = 0.0
 thickness = 2
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 draw_center = false
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 1, 1, 1, 1 )
 draw_center = false
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 draw_center = false
 border_width_bottom = 2
@@ -50,35 +50,35 @@ border_color = Color( 1, 1, 1, 0 )
 border_blend = true
 expand_margin_bottom = 12.0
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 24
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=8]
 size = 26
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxLine" id=14]
+[sub_resource type="StyleBoxLine" id=9]
 color = Color( 1, 1, 1, 1 )
 grow_begin = -4.0
 grow_end = -4.0
 thickness = 2
 vertical = true
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=10]
 size = 28
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=11]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id=12]
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=13]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=14]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -161,7 +161,7 @@ margin_top = 61.0
 margin_right = 864.0
 margin_bottom = 69.0
 size_flags_vertical = 0
-custom_styles/separator = SubResource( 7 )
+custom_styles/separator = SubResource( 2 )
 custom_constants/separation = 8
 
 [node name="Presets" type="HBoxContainer" parent="MarginContainer/Background/VBoxContainer"]
@@ -172,7 +172,7 @@ margin_bottom = 112.0
 [node name="Label" type="Label" parent="MarginContainer/Background/VBoxContainer/Presets"]
 margin_right = 314.0
 margin_bottom = 38.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 3 )
 text = "DIFFICULTY PRESETS"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Presets"]
@@ -193,12 +193,12 @@ margin_right = 538.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 8 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "EASY"
 items = [ "VERY EASY", null, false, 0, null, "EASY", null, false, 1, null, "NORMAL", null, false, 2, null, "HARD", null, false, 3, null, "EXTREME", null, false, 4, null, "Custom", null, false, 5, null ]
 selected = 1
@@ -208,7 +208,7 @@ margin_top = 116.0
 margin_right = 864.0
 margin_bottom = 124.0
 size_flags_vertical = 0
-custom_styles/separator = SubResource( 7 )
+custom_styles/separator = SubResource( 2 )
 custom_constants/separation = 8
 
 [node name="Settings" type="ScrollContainer" parent="MarginContainer/Background/VBoxContainer"]
@@ -234,14 +234,14 @@ margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 8 )
 text = "Map Size"
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size"]
 margin_left = 244.0
 margin_right = 260.0
 margin_bottom = 39.0
-custom_styles/separator = SubResource( 14 )
+custom_styles/separator = SubResource( 9 )
 custom_constants/separation = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Map Size"]
@@ -270,12 +270,12 @@ margin_right = 572.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 8 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Very Small"
 items = [ "Very Small", null, false, 0, null, "Small", null, false, 1, null, "Medium", null, false, 2, null, "Large", null, false, 3, null, "CUSTOM", null, false, 4, null ]
 selected = 0
@@ -307,14 +307,14 @@ margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 8 )
 text = "Timer Reset Type"
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type"]
 margin_left = 244.0
 margin_right = 260.0
 margin_bottom = 39.0
-custom_styles/separator = SubResource( 14 )
+custom_styles/separator = SubResource( 9 )
 custom_constants/separation = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Reset Type"]
@@ -343,12 +343,12 @@ margin_right = 572.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = ExtResource( 8 )
 custom_styles/disabled = ExtResource( 8 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "Reset"
 items = [ "Reset", null, false, 0, null, "Add Time", null, false, 1, null ]
 selected = 0
@@ -360,7 +360,6 @@ margin_right = 564.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 32 )
 max_value = 10000.0
-step = 1.0
 value = 30.0
 rounded = true
 allow_greater = true
@@ -379,7 +378,7 @@ margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 8 )
 text = "Maximum Time"
 valign = 1
 
@@ -387,7 +386,7 @@ valign = 1
 margin_left = 244.0
 margin_right = 260.0
 margin_bottom = 40.0
-custom_styles/separator = SubResource( 14 )
+custom_styles/separator = SubResource( 9 )
 custom_constants/separation = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Timer Max Value"]
@@ -408,7 +407,6 @@ margin_right = 592.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 0, 32 )
 max_value = 10000.0
-step = 1.0
 value = 60.0
 rounded = true
 allow_greater = true
@@ -423,7 +421,7 @@ rect_min_size = Vector2( 0, 48 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 10 )
 text = "Wall Generation"
 valign = 2
 
@@ -439,7 +437,7 @@ margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 8 )
 text = "Standard Passes"
 valign = 1
 
@@ -447,7 +445,7 @@ valign = 1
 margin_left = 244.0
 margin_right = 260.0
 margin_bottom = 40.0
-custom_styles/separator = SubResource( 14 )
+custom_styles/separator = SubResource( 9 )
 custom_constants/separation = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Standard"]
@@ -469,7 +467,6 @@ margin_bottom = 36.0
 rect_min_size = Vector2( 0, 32 )
 min_value = 1.0
 max_value = 6.0
-step = 1.0
 value = 1.0
 rounded = true
 align = 3
@@ -486,7 +483,7 @@ margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 8 )
 text = "Random Passes"
 valign = 1
 
@@ -494,7 +491,7 @@ valign = 1
 margin_left = 244.0
 margin_right = 260.0
 margin_bottom = 40.0
-custom_styles/separator = SubResource( 14 )
+custom_styles/separator = SubResource( 9 )
 custom_constants/separation = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Background/VBoxContainer/Settings/Contents/Wall Random"]
@@ -515,21 +512,21 @@ margin_right = 592.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 0, 32 )
 max_value = 10.0
-step = 1.0
 rounded = true
 allow_greater = true
 align = 3
 
 [node name="Play" type="Button" parent="MarginContainer/Background/VBoxContainer"]
+margin_left = 342.0
 margin_top = 424.0
-margin_right = 864.0
+margin_right = 522.0
 margin_bottom = 472.0
 rect_min_size = Vector2( 180, 48 )
-size_flags_horizontal = 3
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_fonts/font = SubResource( 3 )
+size_flags_horizontal = 6
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "PLAY"
 flat = true
 __meta__ = {
