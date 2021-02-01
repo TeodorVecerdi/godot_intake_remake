@@ -81,23 +81,19 @@ func setZoom(zoomState) -> void:
 
 
 func levelFadeOut() -> void:
-	print("FADING OUT")
 	smoothing_enabled = false
 	tween.interpolate_property(self, "position", center, Vector2(center.x, center.y - 2000), levelTransitionSpeed, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.interpolate_property(transitionFade, "modulate", Color(0,0,0,0), Color(0,0,0,1), 0.5,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 0.2)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	print("FADING OUT COMPLETE")
 	emit_signal("onLevelFadeOut")
 	
 	
 func levelFadeIn() -> void:
-	print("FADING IN")
 	tween.interpolate_property(self, "position", Vector2(center.x, center.y + 2000), center, levelTransitionSpeed,Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.interpolate_property(transitionFade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 0.5,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, levelTransitionSpeed-0.7)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	print("FADING IN COMPLETE")
 	smoothing_enabled = true
 	emit_signal("onLevelFadeIn")
 

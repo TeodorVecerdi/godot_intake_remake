@@ -106,11 +106,9 @@ func _onCameraZoomChanged(state) -> void:
 		timer.start()
 
 	player.lockMovement(state)
-	print("Camera zoom state changed to [%s]" % ("Zoomed Out" if state else "Zoomed In"))
 
 
 func _onTimerCompleted() -> void:
-	print("Time ran out")
 	gameOver()
 
 
@@ -158,7 +156,6 @@ func win() -> void:
 		scoreIncrease = 2
 	var oldScore: int = score
 	score += scoreIncrease
-	print("Score: [%d] (increased by [%d])" % [score, scoreIncrease])
 	showAll()
 	timer.stop()
 	emit_signal("levelCompleted")
@@ -262,7 +259,6 @@ func generateMazeWalls() -> void:
 		elif len(cellStack) != 0:
 			current = cellStack.pop_back()
 		else:
-			print("EXITED MAZE GENERATION EARLY")
 			break
 
 
