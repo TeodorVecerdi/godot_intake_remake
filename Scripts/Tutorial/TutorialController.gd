@@ -28,12 +28,12 @@ func _ready():
 	tween = Tween.new()
 	add_child(tween)
 
+	currentTime = 0.0
+	currentTutorial = 0
+
 	tween.interpolate_property($Fade, "modulate", Color(0,0,0,1), Color(0,0,0,0), 1.5, Tween.TRANS_QUAD, Tween.EASE_IN_OUT, 0.3)
 	tween.start()
 	yield(tween, "tween_completed")
-
-	currentTime = 0.0
-	currentTutorial = 0
 
 
 func _process(delta):
