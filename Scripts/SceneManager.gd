@@ -24,16 +24,12 @@ func LoadScene(sceneIndex: int) -> void:
 
 func _loadSceneImpl(sceneIndex: int) -> void:
 	if sceneIndex == MAIN_MENU:
-		print("Loading main menu scene")
 		_swapScene(MainMenu.instance())
 	elif sceneIndex == GAME:
-		print("Loading game scene")
 		_swapScene(Game.instance())
 	elif sceneIndex == TUTORIAL:
-		print("Loading tutorial scene")
 		_swapScene(Tutorial.instance())
 	elif sceneIndex == GAME_SETTINGS:
-		print("Loading game settings scene")
 		_swapScene(GameSettings.instance())
 
 func _swapScene(newScene: Node):
