@@ -67,11 +67,7 @@ func setZoom(zoomState) -> void:
 
 		position = center
 
-		var viewportSize = get_viewport().size
-		
-		var ratioH = gridHeight / viewportSize.y
-		var aspect = viewportSize.x / viewportSize.y
-		var zoomLevel: float = ratioH * aspect + 0.25
+		var zoomLevel: float = 0.3 * SettingsPresets.SETTINGS["mapSize"]
 		zoom = Vector2(zoomLevel, zoomLevel)
 	else:
 		limit_bottom = int(gridHeight + limitPadding.y)
