@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Sprites/Background.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Rounded Rectangle 1.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Resources/KeySprites/Q.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/Tutorial/MovementTutorial.gd" type="Script" id=13]
 [ext_resource path="res://Resources/KeySprites/Space.png" type="Texture" id=14]
+[ext_resource path="res://Scripts/Tutorial/Zoom.gd" type="Script" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -321,6 +322,9 @@ margin_left = 384.0
 margin_top = 220.0
 margin_right = 384.0
 margin_bottom = 220.0
+script = ExtResource( 15 )
+KeyAnimSpeed = 0.4
+WaitAnimTime = 1.0
 
 [node name="Control" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom"]
 anchor_right = 1.0
@@ -426,7 +430,6 @@ __meta__ = {
 texture = ExtResource( 4 )
 
 [node name="Arrows" type="Node2D" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player"]
-visible = false
 scale = Vector2( 0.5, 0.5 )
 
 [node name="arrow_up_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
@@ -466,9 +469,12 @@ scale = Vector2( 0.06, 0.055 )
 texture = ExtResource( 5 )
 
 [node name="Extra" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cell17" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
 margin_left = -256.914
@@ -871,6 +877,7 @@ margin_left = -63.8906
 margin_top = 121.393
 margin_right = 64.1094
 margin_bottom = 185.393
+rect_pivot_offset = Vector2( 64, 32 )
 texture = ExtResource( 14 )
 expand = true
 __meta__ = {
