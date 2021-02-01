@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background.png-f06ea70460df682433a880630c39f397.stex"
+path="res://.import/Ellipse 1.png-e532488a5136fac3aebfea0d8e73e120.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Main Menu/Background.png"
-dest_files=[ "res://.import/Background.png-f06ea70460df682433a880630c39f397.stex" ]
+source_file="res://Sprites/Ellipse 1.png"
+dest_files=[ "res://.import/Ellipse 1.png-e532488a5136fac3aebfea0d8e73e120.stex" ]
 
 [params]
 

@@ -29,8 +29,8 @@ func _ready() -> void:
 	tween = Tween.new()
 	add_child(tween)
 
-	gridWidth = 2.0 * grid.CellsX * HexConstants.RADIUS * HexConstants.INNER_CONSTANT * grid.Scale
-	gridHeight = 1.5 * grid.CellsY * HexConstants.RADIUS * grid.Scale
+	gridWidth = 2.0 * SettingsPresets.SETTINGS["mapSize"] * HexConstants.RADIUS * HexConstants.INNER_CONSTANT * grid.Scale
+	gridHeight = 1.5 * SettingsPresets.SETTINGS["mapSize"] * HexConstants.RADIUS * grid.Scale
 	center = Vector2(gridWidth / 2.0, gridHeight / 2.0 - HexConstants.RADIUS * 1.2)
 
 	setZoom(false)

@@ -1,0 +1,1250 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Sprites/Background.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Square.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Ellipse 1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Player/Front.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/arrow.png" type="Texture" id=5]
+[ext_resource path="res://Resources/KeySprites/A.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Tiles/Cell1.png" type="Texture" id=7]
+[ext_resource path="res://Resources/KeySprites/E.png" type="Texture" id=8]
+[ext_resource path="res://Resources/KeySprites/D.png" type="Texture" id=9]
+[ext_resource path="res://Resources/KeySprites/Z.png" type="Texture" id=10]
+[ext_resource path="res://Resources/KeySprites/C.png" type="Texture" id=11]
+[ext_resource path="res://Resources/KeySprites/Q.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/Tutorial/MovementTutorial.gd" type="Script" id=13]
+[ext_resource path="res://Resources/KeySprites/Space.png" type="Texture" id=14]
+[ext_resource path="res://Scripts/Tutorial/Zoom.gd" type="Script" id=15]
+[ext_resource path="res://Resources/Fonts/Roboto-Black.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://Resources/Fonts/Roboto-Light.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://Sprites/Tiles/Finish2.png" type="Texture" id=18]
+[ext_resource path="res://Scripts/Tutorial/Win.gd" type="Script" id=19]
+[ext_resource path="res://Scripts/Tutorial/TutorialController.gd" type="Script" id=20]
+[ext_resource path="res://Resources/Fonts/Roboto-Bold.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://Sprites/Rounded Rectangle 1.png" type="Texture" id=22]
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+use_filter = true
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = ExtResource( 17 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 21 )
+
+[node name="Tutorial Root" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 282.969 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 512.676 ]
+}
+TimePerTutorial = 10.0
+FadeTime = 1.0
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 504.0
+size_flags_vertical = 3
+custom_constants/margin_right = 128
+custom_constants/margin_top = 64
+custom_constants/margin_left = 128
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/MarginContainer"]
+self_modulate = Color( 1, 1, 1, 0.227451 )
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 896.0
+margin_bottom = 504.0
+texture = ExtResource( 22 )
+region_rect = Rect2( 0, 0, 256, 256 )
+patch_margin_left = 17
+patch_margin_top = 17
+patch_margin_right = 17
+patch_margin_bottom = 17
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0458679
+margin_top = 0.374573
+margin_right = 0.0458984
+margin_bottom = 0.374573
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer"]
+margin_left = 384.0
+margin_top = 220.0
+margin_right = 384.0
+margin_bottom = 220.0
+script = ExtResource( 13 )
+AnimationSpeed = 0.25
+ScaleArrows = 1.5
+ScaleKeys = 1.5
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 14.0
+margin_bottom = 14.0
+rect_scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell1" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -68.7574
+margin_top = -84.0619
+margin_right = 111.243
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell6" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -5.30841
+margin_top = 20.6295
+margin_right = 174.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell7" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -131.308
+margin_top = 20.6295
+margin_right = 48.6915
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell8" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -5.30841
+margin_top = -189.049
+margin_right = 174.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell9" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -131.308
+margin_top = -189.049
+margin_right = 48.6915
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell2" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -194.394
+margin_top = -84.0619
+margin_right = -14.394
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell3" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = 56.7807
+margin_top = -84.0619
+margin_right = 236.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -15.8333
+margin_right = -5.0
+margin_bottom = -15.8333
+rect_scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = 60.1831
+margin_top = -181.537
+margin_right = 124.183
+margin_bottom = -117.537
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E2" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = 150.148
+margin_top = -33.8947
+margin_right = 214.148
+margin_bottom = 30.1053
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E3" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = 60.1831
+margin_top = 127.33
+margin_right = 124.183
+margin_bottom = 191.33
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E4" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = -123.394
+margin_top = 127.33
+margin_right = -59.3935
+margin_bottom = 191.33
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E5" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = -212.695
+margin_top = -33.8947
+margin_right = -148.695
+margin_bottom = 30.1053
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="E6" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Controls"]
+margin_left = -123.394
+margin_top = -181.537
+margin_right = -59.3935
+margin_bottom = -117.537
+rect_pivot_offset = Vector2( 32, 32 )
+texture = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control"]
+margin_left = -3.1824
+margin_top = 0.24765
+margin_right = -3.1824
+margin_bottom = 0.24765
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( -10.6081, -43.619 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSprite" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player"]
+texture = ExtResource( 4 )
+
+[node name="Arrows" type="Node2D" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="arrow_up_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( 60, -104 )
+rotation = -2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( 122, -1 )
+rotation = -1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( 60, 104 )
+rotation = -0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( -60, 104 )
+rotation = 0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( -122, -1 )
+rotation = 1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_up_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Movement/Control/Player/Arrows"]
+position = Vector2( -60.3297, -103.922 )
+rotation = 2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="Zoom" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 384.0
+margin_top = 220.0
+margin_right = 384.0
+margin_bottom = 220.0
+script = ExtResource( 15 )
+KeyAnimSpeed = 0.4
+WaitAnimTime = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 13.0
+margin_right = 7.0
+margin_bottom = 13.0
+rect_scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell1" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -68.7574
+margin_top = -84.0619
+margin_right = 111.243
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell6" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -5.30841
+margin_top = 20.6295
+margin_right = 174.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell7" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -131.308
+margin_top = 20.6295
+margin_right = 48.6915
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell8" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -5.30841
+margin_top = -189.049
+margin_right = 174.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell9" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -131.308
+margin_top = -189.049
+margin_right = 48.6915
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell2" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -194.394
+margin_top = -84.0619
+margin_right = -14.394
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell3" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = 56.7807
+margin_top = -84.0619
+margin_right = 236.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+margin_left = -3.1824
+margin_top = 0.24765
+margin_right = -3.1824
+margin_bottom = 0.24765
+rect_scale = Vector2( 0.7, 0.7 )
+rect_pivot_offset = Vector2( -10.6081, -43.619 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSprite" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player"]
+texture = ExtResource( 4 )
+
+[node name="Arrows" type="Node2D" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="arrow_up_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( 60, -104 )
+rotation = -2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( 122, -1 )
+rotation = -1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( 60, 104 )
+rotation = -0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( -60, 104 )
+rotation = 0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( -122, -1 )
+rotation = 1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_up_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Player/Arrows"]
+position = Vector2( -60.3297, -103.922 )
+rotation = 2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="Extra" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Cell17" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -256.914
+margin_top = 20.6295
+margin_right = -76.9144
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell18" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -256.914
+margin_top = -189.049
+margin_right = -76.9144
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell19" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -320.0
+margin_top = -84.0619
+margin_right = -140.0
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell20" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -382.748
+margin_top = 20.6295
+margin_right = -202.748
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell21" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -382.748
+margin_top = -189.049
+margin_right = -202.748
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell22" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -445.833
+margin_top = -84.0619
+margin_right = -265.833
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell23" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -509.003
+margin_top = 20.6295
+margin_right = -329.003
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell24" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -509.003
+margin_top = -189.049
+margin_right = -329.003
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell25" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -572.089
+margin_top = -84.0619
+margin_right = -392.089
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell10" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 120.692
+margin_top = 20.6295
+margin_right = 300.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell11" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 120.692
+margin_top = -189.049
+margin_right = 300.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell4" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 182.781
+margin_top = -84.0619
+margin_right = 362.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell12" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 246.692
+margin_top = 20.6295
+margin_right = 426.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell13" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 246.692
+margin_top = -189.049
+margin_right = 426.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell5" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 308.781
+margin_top = -84.0619
+margin_right = 488.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell14" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 372.692
+margin_top = 20.6295
+margin_right = 552.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell26" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 57.1916
+margin_top = 126.196
+margin_right = 237.192
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell27" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -68.8084
+margin_top = 126.196
+margin_right = 111.192
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell28" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -194.415
+margin_top = 126.196
+margin_right = -14.4146
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell29" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -320.248
+margin_top = 126.196
+margin_right = -140.248
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell30" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -445.67
+margin_top = 126.196
+margin_right = -265.67
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell34" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -572.089
+margin_top = 126.196
+margin_right = -392.089
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell31" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 183.192
+margin_top = 126.196
+margin_right = 363.192
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell32" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 309.192
+margin_top = 126.196
+margin_right = 489.192
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell33" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 435.192
+margin_top = 126.196
+margin_right = 615.192
+margin_bottom = 328.196
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell35" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 57.1916
+margin_top = -292.137
+margin_right = 237.192
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell36" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -68.8084
+margin_top = -292.137
+margin_right = 111.192
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell37" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -194.415
+margin_top = -292.137
+margin_right = -14.4146
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell38" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -320.248
+margin_top = -292.137
+margin_right = -140.248
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell39" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -445.67
+margin_top = -292.137
+margin_right = -265.67
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell40" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = -572.089
+margin_top = -292.137
+margin_right = -392.089
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell41" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 183.192
+margin_top = -292.137
+margin_right = 363.192
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell42" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 309.192
+margin_top = -292.137
+margin_right = 489.192
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell43" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 435.192
+margin_top = -292.137
+margin_right = 615.192
+margin_bottom = -90.1371
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell15" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 372.692
+margin_top = -189.049
+margin_right = 552.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell16" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom/Control/Extra"]
+margin_left = 434.781
+margin_top = -84.0619
+margin_right = 614.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Space" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Zoom"]
+margin_left = -63.8906
+margin_top = 121.393
+margin_right = 64.1094
+margin_bottom = 185.393
+rect_pivot_offset = Vector2( 64, 32 )
+texture = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 384.0
+margin_top = 220.0
+margin_right = 384.0
+margin_bottom = 220.0
+script = ExtResource( 19 )
+MoveAnimTime = 0.5
+WaitTime1 = 0.25
+WaitTime3 = 2.0
+WaitTime4 = 0.5
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 13.0
+margin_right = 7.0
+margin_bottom = 13.0
+rect_scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell1" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -68.7574
+margin_top = -84.0619
+margin_right = 111.243
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell6" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -5.30841
+margin_top = 20.6295
+margin_right = 174.692
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell7" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -131.308
+margin_top = 20.6295
+margin_right = 48.6915
+margin_bottom = 222.63
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell8" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -5.30841
+margin_top = -189.049
+margin_right = 174.692
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell9" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -131.308
+margin_top = -189.049
+margin_right = 48.6915
+margin_bottom = 12.9506
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell2" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -194.394
+margin_top = -84.0619
+margin_right = -14.394
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cell3" type="TextureRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = 56.7807
+margin_top = -84.0619
+margin_right = 236.781
+margin_bottom = 117.938
+rect_scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+margin_left = -4.0
+margin_top = -13.0
+margin_right = -4.0
+margin_bottom = -13.0
+rect_scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSprite" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player"]
+texture = ExtResource( 4 )
+
+[node name="Arrows" type="Node2D" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player"]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="arrow_up_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( 60, -104 )
+rotation = -2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( 122, -1 )
+rotation = -1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_right" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( 60, 104 )
+rotation = -0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_down_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( -60, 104 )
+rotation = 0.523599
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( -122, -1 )
+rotation = 1.5708
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="arrow_up_left" type="Sprite" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/Player/Arrows"]
+position = Vector2( -60.3297, -103.922 )
+rotation = 2.61799
+scale = Vector2( 0.06, 0.055 )
+texture = ExtResource( 5 )
+
+[node name="UI" type="Control" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -66.6667
+margin_top = 13.3333
+margin_right = -66.6667
+margin_bottom = 13.3333
+rect_scale = Vector2( 0.9, 0.9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI"]
+modulate = Color( 0, 0, 0, 0.533333 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -288.0
+margin_top = -231.0
+margin_right = 424.0
+margin_bottom = 177.0
+texture = ExtResource( 22 )
+patch_margin_left = 17
+patch_margin_top = 17
+patch_margin_right = 17
+patch_margin_bottom = 17
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win" type="VBoxContainer" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -107.0
+margin_top = -127.0
+margin_right = 235.0
+margin_bottom = 71.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI/Win"]
+margin_right = 342.0
+margin_bottom = 198.0
+size_flags_vertical = 3
+
+[node name="TextContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI/Win/MarginContainer"]
+margin_right = 342.0
+margin_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI/Win/MarginContainer/TextContainer"]
+margin_right = 342.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color_shadow = Color( 0.2, 0.2, 0.2, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 0
+text = "Level complete!"
+align = 1
+valign = 2
+
+[node name="Message" type="Label" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI/Win/MarginContainer/TextContainer"]
+margin_top = 61.0
+margin_right = 342.0
+margin_bottom = 137.0
+custom_fonts/font = SubResource( 4 )
+text = "Well done!"
+align = 1
+
+[node name="Score" type="Label" parent="VBoxContainer/MarginContainer/Background/CenterContainer/Win/Control/UI/Win/MarginContainer/TextContainer"]
+margin_top = 141.0
+margin_right = 342.0
+margin_bottom = 198.0
+custom_fonts/font = SubResource( 5 )
+text = "Score: 16"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/MarginContainer/Background"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -7.0
+margin_right = 6.10352e-05
+margin_bottom = 7.0
+rect_scale = Vector2( 1, 0.5 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 0 )
+max_value = 1.0
+step = 0.001
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 504.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_bottom = 32
+
+[node name="HBox" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+margin_right = 1024.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+alignment = 1
+
+[node name="TutorialTab1" type="TextureButton" parent="VBoxContainer/MarginContainer2/HBox"]
+margin_left = 478.0
+margin_right = 498.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 20, 32 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="TutorialTab2" type="TextureButton" parent="VBoxContainer/MarginContainer2/HBox"]
+self_modulate = Color( 1, 1, 1, 0.35 )
+margin_left = 502.0
+margin_right = 522.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 20, 32 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="TutorialTab3" type="TextureButton" parent="VBoxContainer/MarginContainer2/HBox"]
+self_modulate = Color( 1, 1, 1, 0.35 )
+margin_left = 526.0
+margin_right = 546.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 20, 32 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="Skip Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -86.0
+margin_top = -44.0
+margin_right = 86.0
+custom_fonts/font = SubResource( 6 )
+text = "I'M READY!"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade" type="TextureRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/HBox/TutorialTab1" to="." method="loadTutorialButton" binds= [ 0 ]]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/HBox/TutorialTab2" to="." method="loadTutorialButton" binds= [ 1 ]]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/HBox/TutorialTab3" to="." method="loadTutorialButton" binds= [ 2 ]]
+[connection signal="pressed" from="Skip Button" to="." method="tutorialComplete"]
